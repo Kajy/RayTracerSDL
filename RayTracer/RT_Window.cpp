@@ -38,7 +38,7 @@ RT_Window::RT_Window(const std::string title, int x, int y)
 	}
 	_OpenGLContext = SDL_GL_CreateContext(_Window);
 
-	if (this->_Window == 0) {
+	if (this->_OpenGLContext == 0) {
 		std::cout << SDL_GetError() << std::endl;
 		SDL_DestroyWindow(_Window);
 		SDL_Quit();
