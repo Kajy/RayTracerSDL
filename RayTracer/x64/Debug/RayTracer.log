@@ -1,1 +1,12 @@
-﻿LINK : fatal error LNK1104: cannot open file 'SDL2main.lib'
+﻿  Source.cpp
+  RT_Window.cpp
+  Generating Code...
+RT_Window.obj : error LNK2019: unresolved external symbol SDL_GetError referenced in function "public: __cdecl RT_Window::RT_Window(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (??0RT_Window@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+RT_Window.obj : error LNK2019: unresolved external symbol SDL_CreateWindow referenced in function "public: __cdecl RT_Window::RT_Window(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (??0RT_Window@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+RT_Window.obj : error LNK2019: unresolved external symbol SDL_WaitEvent referenced in function "public: void __cdecl RT_Window::waitEvent(void)" (?waitEvent@RT_Window@@QEAAXXZ)
+RT_Window.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function "public: __cdecl RT_Window::RT_Window(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (??0RT_Window@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+RT_Window.obj : error LNK2019: unresolved external symbol SDL_Quit referenced in function "public: __cdecl RT_Window::RT_Window(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (??0RT_Window@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\182324\Desktop\RayTracerSDL\RayTracer\SDL2-2.0.5\lib\x86\SDL2main.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+C:\Users\182324\Desktop\RayTracerSDL\RayTracer\SDL2-2.0.5\lib\x86\SDL2.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+C:\Users\182324\Desktop\RayTracerSDL\x64\Debug\RayTracer.exe : fatal error LNK1120: 6 unresolved externals
