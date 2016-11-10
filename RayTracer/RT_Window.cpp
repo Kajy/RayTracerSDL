@@ -19,14 +19,14 @@ RT_Window::RT_Window(const std::string title, int x, int y)
 
 	// Version d'OpenGL
 
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
 
 	// Double Buffer
 
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	//SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	//SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
 	// Création de la fenêtre
 
@@ -36,13 +36,13 @@ RT_Window::RT_Window(const std::string title, int x, int y)
 		std::cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << std::endl;
 		SDL_Quit();
 	}
-	_OpenGLContext = SDL_GL_CreateContext(_Window);
+	//_OpenGLContext = SDL_GL_CreateContext(_Window);
 
-	if (this->_OpenGLContext == 0) {
+	/*if (this->_OpenGLContext == 0) {
 		std::cout << SDL_GetError() << std::endl;
 		SDL_DestroyWindow(_Window);
 		SDL_Quit();
-	}
+	}*/
 }
 
 
@@ -57,4 +57,9 @@ void	RT_Window::waitEvent()
 bool	RT_Window::checkEvent(SDL_WindowEventID id)
 {
 	return (_Event->window.event == id);
+}
+
+SDL_Window	*RT_Window::getWindow()
+{
+	return (_Window);
 }

@@ -16,6 +16,7 @@ private:
 public:
 	RT_Window(const std::string title, int x, int y);
 	~RT_Window();
+	SDL_Window	*getWindow();
 	void	waitEvent();
 	bool	checkEvent(SDL_WindowEventID id);
 };

@@ -162,8 +162,11 @@
   <ItemGroup>
     <ClCompile Include="RT_Window.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="RT_Pixel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RT_Vector.h" />
+    <ClInclude Include="RT_Pixel.h" />
     <ClInclude Include="RT_Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

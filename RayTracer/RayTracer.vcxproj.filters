@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Window">
+    <Filter Include="Source Files\Class">
       <UniqueIdentifier>{6482776b-cf6a-4885-9c13-168ed93ce5cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -22,11 +22,20 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RT_Window.cpp">
-      <Filter>Source Files\Window</Filter>
+      <Filter>Source Files\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="RT_Pixel.cpp">
+      <Filter>Source Files\Class</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RT_Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Pixel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
