@@ -9,6 +9,7 @@ public:
 		_z(z)
 	{};
 	~RT_Vector3df() {};
+
 	void	setValue(float x, float y, float z)
 	{
 		_x = x;

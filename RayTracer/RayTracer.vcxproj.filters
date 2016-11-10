@@ -19,16 +19,25 @@
     <Filter Include="Header Files\Objects">
       <UniqueIdentifier>{386bec7a-bd08-417b-9834-0a0c139a4d08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{4b2de22e-1c09-411f-889d-1692801537b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RT_Window.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
     <ClCompile Include="RT_Pixel.cpp">
       <Filter>Source Files\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RT_Scene.cpp">
+      <Filter>Source Files\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="RT_Sphere.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,14 +47,20 @@
     <ClInclude Include="RT_Pixel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Sphere.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="RT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RT_Vector3df.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Object.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Sphere.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

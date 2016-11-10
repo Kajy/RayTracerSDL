@@ -8,6 +8,7 @@ public:
 	SDL_Renderer	*getRenderer();
 	void	setColor(int R, int G, int B);
 	void	drawPixel(int x, int y);
+	void	setDist(float dist);
 
 private:
 	SDL_Renderer	*_Renderer;
@@ -20,4 +21,5 @@ private:
 	uint32_t		_prevB;
 	uint32_t		_x;
 	uint32_t		_y;
+	float			_distInter;
 };

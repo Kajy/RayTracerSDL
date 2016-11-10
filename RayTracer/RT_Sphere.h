@@ -1,15 +1,12 @@
 #include "RT.h"
 
-class RT_Sphere
+class RT_Sphere : public RT_Object
 {
 public:
-	RT_Sphere(float x, float y, float z, float radius) {
-		_origin = new RT_Vector3df(x, y, z);
-	};
-	~RT_Sphere() {};
+	RT_Sphere(float radius);
+	~RT_Sphere();
 
+	float	checkCollision(RT_Vector3df *vect, RT_Vector3df *camera);
 private:
-	float		_radius;
-	RT_Vector3df	*_origin;
-	
+	float _radius;
 };

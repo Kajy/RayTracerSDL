@@ -4,6 +4,7 @@ RT_Pixel::RT_Pixel(RT_Window *window)
 {
 	_Renderer = SDL_CreateRenderer(window->getWindow(), 0, SDL_RENDERER_ACCELERATED);
 	_Window = window;
+	//_vector = new RT_Vector3df(0, 0, 0);
 	_R = 0;
 	_G = 0;
 	_B = 0;
@@ -37,4 +38,9 @@ SDL_Renderer	*RT_Pixel::getRenderer()
 void	RT_Pixel::drawPixel(int x, int y)
 {
 	SDL_RenderDrawPoint(_Renderer, x, y);
+}
+
+void	RT_Pixel::setDist(float dist)
+{
+	_distInter = dist;
 }
