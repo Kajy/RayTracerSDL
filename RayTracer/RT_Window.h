@@ -1,6 +1,4 @@
-#include <SDL.h>
-#include <string>
-#include <iostream>
+#include "RT.h"
 
 class RT_Window
 {

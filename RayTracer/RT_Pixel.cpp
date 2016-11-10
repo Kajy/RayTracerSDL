@@ -1,4 +1,4 @@
-#include "RT_Pixel.h"
+#include "RT.h"
 
 RT_Pixel::RT_Pixel(RT_Window *window)
 {

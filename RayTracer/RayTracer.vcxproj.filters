@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Class">
       <UniqueIdentifier>{6482776b-cf6a-4885-9c13-168ed93ce5cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{386bec7a-bd08-417b-9834-0a0c139a4d08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -35,7 +38,13 @@
     <ClInclude Include="RT_Pixel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Vector.h">
+    <ClInclude Include="RT_Sphere.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="RT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Vector3df.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

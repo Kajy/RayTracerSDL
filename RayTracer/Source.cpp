@@ -1,8 +1,4 @@
-#include <SDL.h>
-#include <math.h>
-#include "RT_Pixel.h"
-#include "RT_Vector.h"
-#include <iostream>
+#include "RT.h"
 
 #define FOV 100
 #define RES_X 1280
@@ -13,25 +9,28 @@ int main(int ac, char **av)
 	RT_Window	*window = new RT_Window("Raytracer", RES_X, RES_Y);
 
 	RT_Pixel	*pixel = new RT_Pixel(window);
-	RT_Vector	*camera = new RT_Vector(-300, 0, 0);
-	RT_Vector	*screen = new RT_Vector(0, 0, 0);
-	RT_Vector	*vect = new RT_Vector(0, 0, 0);
+	RT_Vector3df	*camera = new RT_Vector3df(-300, 0, 0);
+	RT_Vector3df	*screen = new RT_Vector3df(0, 0, 0);
+	RT_Vector3df	*vect = new RT_Vector3df(0, 0, 0);
 
-	int a, b, c, d;
+	float a, b, c, d;
+	float k;
 	pixel->setColor(255, 0, 0);
 	
 	for (int x = 0; x < RES_X; x++)
 	{
 		for (int y = 0; y < RES_Y; y++)
 		{
-			screen->setValue(x - (RES_X / 2), y - (RES_Y / 2), FOV);
+			screen->setValue(FOV, (RES_X / 2) - x, (RES_Y / 2) - y);
 			vect->setValue(screen->_x - camera->_x, screen->_y - camera->_y, screen->_z - camera->_z);
+			vect->normalize();
 			a = (vect->_x * vect->_x) + (vect->_y * vect->_y) + (vect->_z * vect->_z);		
 			b = 2 * ((camera->_x * vect->_x) + (camera->_y * vect->_y) + (camera->_z * vect->_z));
-			c = (camera->_x * camera->_x) + (camera->_y * camera->_y) + (camera->_z * camera->_z) - (10 * 10);
-			std::cout << a << b << c << std::endl;
+			c = (camera->_x * camera->_x) + (camera->_y * camera->_y) + (camera->_z * camera->_z) - (150 * 150);
 			d = (b * b) - (4 * a * c);
-			if (d >= 0) {
+
+			k = (-b + sqrt(d)) / (2 * a);
+			if (k > 0) {
 				pixel->drawPixel(x, y);
 			}
 		}

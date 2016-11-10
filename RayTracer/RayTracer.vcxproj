@@ -165,7 +165,9 @@
     <ClCompile Include="RT_Pixel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RT_Vector.h" />
+    <ClInclude Include="RT.h" />
+    <ClInclude Include="RT_Sphere.h" />
+    <ClInclude Include="RT_Vector3df.h" />
     <ClInclude Include="RT_Pixel.h" />
     <ClInclude Include="RT_Window.h" />
   </ItemGroup>

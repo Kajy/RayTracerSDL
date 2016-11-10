@@ -1,4 +1,4 @@
-#include "RT_Window.h"
+#include "RT.h"
 
 class RT_Pixel
 {
