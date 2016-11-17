@@ -167,6 +167,8 @@
     <ClCompile Include="RT_Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RT_Light.h" />
+    <ClInclude Include="RT_Intersec.h" />
     <ClInclude Include="RT_Sphere.h" />
     <ClInclude Include="RT_Scene.h" />
     <ClInclude Include="RT_Object.h" />

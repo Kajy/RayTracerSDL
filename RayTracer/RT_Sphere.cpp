@@ -1,21 +1,24 @@
 #include "RT.h"
 
-RT_Sphere::RT_Sphere(float radius)
+RT_Sphere::RT_Sphere(int x, int y, int z, float radius, uint32_t color)
 {
 	_radius = radius;
+	_color = color;
+	_pos = new RT_Vector3df(x, y, z);
 }
 
 RT_Sphere::~RT_Sphere()
 {
 }
 
-float	RT_Sphere::checkCollision(RT_Vector3df *vect, RT_Vector3df *camera)
+float	RT_Sphere::checkCollision(int x, int y, RT_Vector3df *camera, RT_Vector3df *vect)
 {
 	float a, b, c, d, k1, k2;
 
+	vect->normalize();
 	a = (vect->_x * vect->_x) + (vect->_y * vect->_y) + (vect->_z * vect->_z);
-	b = 2 * ((camera->_x * vect->_x) + (camera->_y * vect->_y) + (camera->_z * vect->_z));
-	c = (camera->_x * camera->_x) + (camera->_y * camera->_y) + (camera->_z * camera->_z) - (_radius * _radius);
+	b = 2 * (((camera->_x - _pos->_x) * vect->_x) + ((camera->_y - _pos->_y) * vect->_y) + ((camera->_z - _pos->_z) * vect->_z));
+	c = ((camera->_x - _pos->_x) * (camera->_x - _pos->_x)) + ((camera->_y - _pos->_y) * (camera->_y - _pos->_y)) + ((camera->_z - _pos->_z) * (camera->_z - _pos->_z)) - (_radius * _radius);
 	d = (b * b) - (4 * a * c);
 
 	k1 = (-b + sqrt(d)) / (2 * a);
@@ -24,4 +27,11 @@ float	RT_Sphere::checkCollision(RT_Vector3df *vect, RT_Vector3df *camera)
 		return (k1 < k2 ? (k1 < 0 ? k2 : k1) : (k2 < 0 ? k1 : k2));
 	}
 	return (-1);
+}
+
+void	RT_Sphere::calcNormale(RT_Vector3df *vect, float k, RT_Vector3df *camera, RT_Intersec *inter)
+{
+	inter->setInter(((camera->_x - _pos->_x) + (k * vect->_x)), ((camera->_y - _pos->_y) + (k * vect->_y)), ((camera->_z - _pos->_z) + (k * vect->_z)));
+	inter->setNormale(inter->getInter()->_x - _pos->_x, inter->getInter()->_y - _pos->_y, inter->getInter()->_z - _pos->_z);
+	inter->getNormale()->normalize();
 }

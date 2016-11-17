@@ -62,5 +62,11 @@
     <ClInclude Include="RT_Sphere.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="RT_Intersec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
