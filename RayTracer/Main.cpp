@@ -1,5 +1,32 @@
 #include "RT.h"
 
+
+uint32_t	calcAll(RT_Scene *scene, float x, float y)
+{
+	RT_Intersec		*tmp_inter;
+	tmp_inter = scene->checkCollisionAll(x, y);
+	int tmp = sqrt(ANTIALIASING);
+	float sub = 1./ ANTIALIASING;
+	float R = 0, G = 0, B = 0;
+	int x2 = 1;
+	int y2;
+		while (x2 <= tmp) {
+			y2 = 1;
+			while (y2 <= tmp) {
+				tmp_inter = scene->checkCollisionAll(x + sub * x2, y + sub * y2);
+				R += ((tmp_inter->getColor() & 0xff000000) >> 24);
+				G += ((tmp_inter->getColor() & 0x00ff0000) >> 16);
+				B += ((tmp_inter->getColor() & 0x0000ff00) >> 8);
+				++y2;
+			}
+			++x2;
+	}
+	R /= ANTIALIASING;
+	G /= ANTIALIASING;
+	B /= ANTIALIASING;
+	return (((unsigned int)R << 24) + ((unsigned int)G << 16) + ((unsigned int)B << 8));
+}
+
 int main(int ac, char **av)
 {
 	RT_Window	*window = new RT_Window("Raytracer", RES_X, RES_Y);
@@ -8,29 +35,31 @@ int main(int ac, char **av)
 	RT_Scene	*scene = new RT_Scene();
 
 	scene->setCamera(-300, 0, 0);
-	scene->addLightOnScene(-300, -200, 0, 0xFFFFFFFF);
+	scene->addLightOnScene(0, 30, 0, 0xFFFFFFFF);
+	scene->addLightOnScene(0, -70, 0, 0xFFFFFFFF);
 	pixel->setColor(0);
 	
-	RT_Sphere	*testSphere = new RT_Sphere(0, 0, 0, 5, 0xFFFF0000);
-	//RT_Sphere	*testSphere2 = new RT_Sphere(0, 0, 0, 3, 0x0000FF00);
+	RT_Sphere	*testSphere = new RT_Sphere(0, 0, 0, 10, 0xFFFF0000);
+	/*RT_Sphere	*testSphere2 = new RT_Sphere(50, 0, 0, 5, 0x0000FF00);
+	RT_Sphere	*testSphere3 = new RT_Sphere(0, -20, 0, 5, 0x0000FF00);
+	RT_Sphere	*testSphere4 = new RT_Sphere(0, 30, 0, 3, 0xFF000000);*/
 	
 	scene->addObjectOnScene(testSphere);
-	//scene->addObjectOnScene(testSphere2);
+	/*scene->addObjectOnScene(testSphere2);
+	scene->addObjectOnScene(testSphere3);
+	scene->addObjectOnScene(testSphere4);*/
 	for (int x = 0; x < RES_X; x++)
 	{
 		for (int y = 0; y < RES_Y; y++)
 		{
-			RT_Intersec *inter = scene->checkCollisionAll(x, y);
-			if (inter->getDist() > 0)
-			{
+			if (ANTIALIASING == 1) {
+				RT_Intersec *inter = scene->checkCollisionAll(x, y);
 				pixel->setColor(inter->getColor());
-				pixel->drawPixel(x, y);
 			}
 			else {
-				pixel->setColor(0xFFFFFF00);
-				pixel->drawPixel(x, y);
+				pixel->setColor(calcAll(scene, x, y));
 			}
-
+			pixel->drawPixel(x, y);
 		}
 	}
 	SDL_RenderPresent(pixel->getRenderer());

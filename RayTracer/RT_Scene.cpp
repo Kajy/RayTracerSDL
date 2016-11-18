@@ -30,7 +30,7 @@ RT_Vector3df *RT_Scene::getCamera()
 	return (_camera);
 }
 
-RT_Intersec		*RT_Scene::checkCollisionAll(int x, int y)
+RT_Intersec		*RT_Scene::checkCollisionAll(float x, float y)
 {
 	float		k = -1;
 	float		tmp = -1;
@@ -68,21 +68,23 @@ void		RT_Scene::checkLights(RT_Intersec *inter)
 	float			cos_light = 0;
 	RT_Vector3df	*vect_light = new RT_Vector3df(0, 0, 0);
 
+	uint32_t tmp_color = inter->getColor();
+	float R = ((COLOR_BACKGROUND & 0xff000000) >> 24);
+	float G = ((COLOR_BACKGROUND & 0x00ff0000) >> 16);
+	float B = ((COLOR_BACKGROUND & 0x0000ff00) >> 8);
 	for (auto i(_lights.begin()); i != _lights.end(); ++i) {
 		vect_light->setValue((*i)->getPos()->_x - inter->getInter()->_x, (*i)->getPos()->_y - inter->getInter()->_y, (*i)->getPos()->_z - inter->getInter()->_z);
 		vect_light->normalize();
 		cos_light = (inter->getNormale()->_x * vect_light->_x) + (inter->getNormale()->_y * vect_light->_y) + (inter->getNormale()->_z * vect_light->_z);
+		if (cos_light >= 0.000001) {
+			R += ((tmp_color & 0xff000000) >> 24) * cos_light;
+			G += ((tmp_color & 0x00ff0000) >> 16) * cos_light;
+			B += ((tmp_color & 0x0000ff00) >> 8) * cos_light;
+		}
 	}
-	uint32_t tmp_color = inter->getColor();
-	float R = ((tmp_color & 0xff000000) >> 24) * cos_light;
-	float G = ((tmp_color & 0x00ff0000) >> 16) * cos_light;
-	float B = ((tmp_color & 0x0000ff00) >> 8) * cos_light;
-	if (R < 0)
-		R = 0;
-	if (G < 0)
-		G = 0;
-	if (B < 0)
-		B = 0;
+	R /= _lights.size();
+	G /= _lights.size();
+	B /= _lights.size();
 	tmp_color = ((unsigned int)R << 24) + ((unsigned int)G << 16) + ((unsigned int)B << 8);
 	inter->setColor(tmp_color);
 

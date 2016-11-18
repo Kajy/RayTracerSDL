@@ -20,5 +20,7 @@
 #define FOV 6000
 #define RES_X 1280
 #define RES_Y 720
+#define COLOR_BACKGROUND 0x00000000
+#define ANTIALIASING 1
 
 #endif // ! RT_H_

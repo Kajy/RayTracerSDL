@@ -10,6 +10,7 @@ public:
 	~RT_Light() {};
 
 	RT_Vector3df	*getPos() { return _pos; }
+	uint32_t		getColor() { return _color; }
 
 private:
 	RT_Vector3df	*_pos;
