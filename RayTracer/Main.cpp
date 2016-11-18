@@ -1,4 +1,7 @@
 #include "RT.h"
+#include "RT_Scene.h"
+#include "RT_Pixel.h"
+#include "RT_Sphere.h"
 
 
 uint32_t	calcAll(RT_Scene const &scene, int x, int y)

@@ -1,5 +1,3 @@
-#include "RT.h"
-
 #ifndef RT_LIGHT_H_
 #define RT_LIGHT_H_
 

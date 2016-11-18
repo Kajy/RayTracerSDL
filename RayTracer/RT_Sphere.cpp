@@ -12,7 +12,7 @@ RT_Sphere::~RT_Sphere()
 {
 }
 
-float	RT_Sphere::checkCollision(int x, int y, RT_Vector3df const &camera, RT_Vector3df const &vect) const
+float	RT_Sphere::checkCollision(RT_Vector3df const &camera, RT_Vector3df const &vect) const
 {
 	float a, b, c, d, k1, k2;
 

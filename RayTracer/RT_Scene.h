@@ -1,8 +1,10 @@
-#include "RT.h"
-
 #ifndef RT_SCENE_H_
 #define RT_SCENE_H_
 
+#include "RT_Intersec.h"
+#include "RT_Object.h"
+#include "RT_Light.h"
+#include "RT_Vector3df.h"
 
 
 class RT_Scene

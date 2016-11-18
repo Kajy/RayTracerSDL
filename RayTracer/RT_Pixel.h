@@ -1,7 +1,7 @@
-#include "RT.h"
-
 #ifndef RT_PIXEL_H_
 #define RT_PIXEL_H_
+
+#include "RT_Window.h"
 
 class RT_Pixel
 {

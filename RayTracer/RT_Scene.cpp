@@ -41,7 +41,7 @@ RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
 	for (auto i(_objects.begin()); i != _objects.end(); ++i) {
 		vect.setValue(FOV - this->getCamera()._x - (*i)->getPos()._x, ((RES_X / 2) - x) - this->getCamera()._y - (*i)->getPos()._y, ((RES_Y / 2) - y) - this->getCamera()._z - (*i)->getPos()._z);
 		vect.normalize();
-		tmp = (*i)->checkCollision(x, y, this->getCamera(), vect);
+		tmp = (*i)->checkCollision(this->getCamera(), vect);
 		if ((tmp > 0 && k == -1) || (tmp > 0 && tmp < k)) {
 			k = tmp;
 			obj = (*i);

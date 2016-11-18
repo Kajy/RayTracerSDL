@@ -1,7 +1,7 @@
-#include "RT.h"
-
 #ifndef RT_INTERSEC_H_
 #define RT_INTERSEC_H_
+
+#include "RT_Vector3df.h"
 
 class RT_Intersec
 {
