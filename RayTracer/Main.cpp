@@ -43,10 +43,10 @@ int main(int ac, char **av)
 	RT_Sphere	testSphere3(0, -20, 0, 5, 0x00FF0000);
 	RT_Sphere	testSphere4(0, 30, 0, 3, 0xFF000000);
 	
-	scene.addObjectOnScene(testSphere);
-	scene.addObjectOnScene(testSphere2);
-	scene.addObjectOnScene(testSphere3);
-	scene.addObjectOnScene(testSphere4);
+	scene.addObjectOnScene(&testSphere);
+	scene.addObjectOnScene(&testSphere2);
+	scene.addObjectOnScene(&testSphere3);
+	scene.addObjectOnScene(&testSphere4);
 	for (int x = 0; x < RES_X; x++)
 	{
 		for (int y = 0; y < RES_Y; y++)

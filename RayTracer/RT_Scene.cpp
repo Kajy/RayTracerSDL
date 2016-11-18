@@ -13,7 +13,7 @@ void	RT_Scene::setCamera(float x, float y, float z)
 	_camera.setValue(x, y, z);
 }
 
-void	RT_Scene::addObjectOnScene(RT_Object const &obj)
+void	RT_Scene::addObjectOnScene(RT_Object *obj)
 {
 	_objects.push_back(obj);
 }
@@ -39,13 +39,13 @@ RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
 	RT_Vector3df vect(0, 0, 0);
 
 	for (auto i(_objects.begin()); i != _objects.end(); ++i) {
-		vect.setValue(FOV - this->getCamera()._x - (*i).getPos()._x, ((RES_X / 2) - x) - this->getCamera()._y - (*i).getPos()._y, ((RES_Y / 2) - y) - this->getCamera()._z - (*i).getPos()._z);
+		vect.setValue(FOV - this->getCamera()._x - (*i)->getPos()._x, ((RES_X / 2) - x) - this->getCamera()._y - (*i)->getPos()._y, ((RES_Y / 2) - y) - this->getCamera()._z - (*i)->getPos()._z);
 		vect.normalize();
-		tmp = (*i).checkCollision(x, y, this->getCamera(), vect);
+		tmp = (*i)->checkCollision(x, y, this->getCamera(), vect);
 		if ((tmp > 0 && k == -1) || (tmp > 0 && tmp < k)) {
 			k = tmp;
-			obj = &(*i);
-			tmp_color = (*i).getColor();
+			obj = (*i);
+			tmp_color = (*i)->getColor();
 		}
 	}
 	if (k != -1 && obj != NULL) {
