@@ -3,7 +3,7 @@
 
 uint32_t	calcAll(RT_Scene *scene, float x, float y)
 {
-	RT_Intersec		*tmp_inter;
+	RT_Intersec		tmp_inter;
 	tmp_inter = scene->checkCollisionAll(x, y);
 	int tmp = sqrt(ANTIALIASING);
 	float sub = 1./ ANTIALIASING;
@@ -14,9 +14,9 @@ uint32_t	calcAll(RT_Scene *scene, float x, float y)
 			y2 = 1;
 			while (y2 <= tmp) {
 				tmp_inter = scene->checkCollisionAll(x + sub * x2, y + sub * y2);
-				R += ((tmp_inter->getColor() & 0xff000000) >> 24);
-				G += ((tmp_inter->getColor() & 0x00ff0000) >> 16);
-				B += ((tmp_inter->getColor() & 0x0000ff00) >> 8);
+				R += ((tmp_inter.getColor() & 0xff000000) >> 24);
+				G += ((tmp_inter.getColor() & 0x00ff0000) >> 16);
+				B += ((tmp_inter.getColor() & 0x0000ff00) >> 8);
 				++y2;
 			}
 			++x2;
@@ -35,8 +35,8 @@ int main(int ac, char **av)
 	RT_Scene	*scene = new RT_Scene();
 
 	scene->setCamera(-300, 0, 0);
-	scene->addLightOnScene(0, 30, 0, 0xFFFFFFFF);
-	scene->addLightOnScene(0, -70, 0, 0xFFFFFFFF);
+	scene->addLightOnScene(-100, 30, 0, 0xFFFFFFFF);
+	//scene->addLightOnScene(0, -70, 0, 0xFFFFFFFF);
 	pixel->setColor(0);
 	
 	RT_Sphere	*testSphere = new RT_Sphere(0, 0, 0, 10, 0xFFFF0000);
@@ -53,8 +53,8 @@ int main(int ac, char **av)
 		for (int y = 0; y < RES_Y; y++)
 		{
 			if (ANTIALIASING == 1) {
-				RT_Intersec *inter = scene->checkCollisionAll(x, y);
-				pixel->setColor(inter->getColor());
+				RT_Intersec inter = scene->checkCollisionAll(x, y);
+				pixel->setColor(inter.getColor());
 			}
 			else {
 				pixel->setColor(calcAll(scene, x, y));
