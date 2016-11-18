@@ -3,6 +3,7 @@
 #define RT_H_
 
 #include <SDL.h>
+#include <vld.h>
 #include <math.h>
 #include <iostream>
 #include <vector>

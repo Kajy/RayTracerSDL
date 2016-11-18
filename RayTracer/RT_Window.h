@@ -1,5 +1,8 @@
 #include "RT.h"
 
+#ifndef RT_WINDOW_H_
+#define RT_WINDOW_H_
+
 class RT_Window
 {
 private:
@@ -14,8 +17,9 @@ private:
 public:
 	RT_Window(const std::string title, int x, int y);
 	~RT_Window();
-	SDL_Window	*getWindow();
-	void	waitEvent();
-	bool	checkEvent(SDL_WindowEventID id);
+	SDL_Window	*getWindow() const;
+	void	waitEvent() const;
+	bool	checkEvent(SDL_WindowEventID id) const;
 };
 
+#endif // !RT_WINDOW_H_

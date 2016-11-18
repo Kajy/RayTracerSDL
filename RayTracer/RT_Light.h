@@ -1,5 +1,8 @@
 #include "RT.h"
 
+#ifndef RT_LIGHT_H_
+#define RT_LIGHT_H_
+
 class RT_Light
 {
 public:
@@ -9,10 +12,12 @@ public:
 	};
 	~RT_Light() {};
 
-	RT_Vector3df	*getPos() { return _pos; }
-	uint32_t		getColor() { return _color; }
+	RT_Vector3df	*getPos() const { return _pos; }
+	uint32_t		getColor() const { return _color; }
 
 private:
 	RT_Vector3df	*_pos;
 	uint32_t		_color;
 };
+
+#endif // !RT_LIGHT_H_
