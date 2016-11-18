@@ -47,9 +47,9 @@ int main(int ac, char **av)
 	scene.addObjectOnScene(&testSphere2);
 	scene.addObjectOnScene(&testSphere3);
 	scene.addObjectOnScene(&testSphere4);
-	for (int x = 0; x < RES_X; x++)
+	for (int x = 0; x < RES_X; ++x)
 	{
-		for (int y = 0; y < RES_Y; y++)
+		for (int y = 0; y < RES_Y; ++y)
 		{
 			if (ANTIALIASING == 1) {
 				RT_Intersec inter = scene.checkCollisionAll(x, y);
