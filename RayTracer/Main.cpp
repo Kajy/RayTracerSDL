@@ -54,6 +54,18 @@ void	test_light(RT_Scene *scene)
 	scene->addObjectOnScene(testSphere9);
 }
 
+void	test_shadow(RT_Scene *scene)
+{
+	RT_Sphere	*testSphere = new RT_Sphere(0, 0, 0, 10, 0xFFFF0000);
+	RT_Sphere	*testSphere2 = new RT_Sphere(-70, 20, 15, 10, 0xFFFF0000);
+	RT_Plane	*testPlane = new RT_Plane(0, 0, 1, -20, 0xFFFFFFFF);
+
+	scene->addObjectOnScene(testSphere);
+	scene->addObjectOnScene(testSphere2);
+	scene->addObjectOnScene(testPlane);
+	//scene->addLightOnScene(-200, -50, 50, 0xFFFFFFFF);
+}
+
 int main(int ac, char **av)
 {
 	RT_Window	window("Raytracer", RES_X, RES_Y);
@@ -61,11 +73,14 @@ int main(int ac, char **av)
 	RT_Pixel	pixel(&window);
 	RT_Scene	scene;
 
-	scene.setCamera(-700, 0, 0);
-	scene.addLightOnScene(-200, 50, 0, 0xFFFFFFFF);
+	scene.setCamera(-700, 0, 10);
+	
+	scene.addLightOnScene(-200, 50, 40, 0xFFFFFFFF);
+	scene.addLightOnScene(-200, -50, 50, 0xFFFFFFFF);
 	//scene.addLightOnScene(0, -70, 0, 0xFFFFFFFF);
 	
-	test_light(&scene);
+	//test_light(&scene);
+	test_shadow(&scene);
 
 	for (int x = 0; x < RES_X; ++x)
 	{

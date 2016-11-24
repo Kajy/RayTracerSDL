@@ -35,7 +35,7 @@ RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
 	float		tmp = -1;
 	uint32_t	tmp_color = 0;
 	RT_Intersec inter;
-	RT_Object const 	*obj = NULL;
+	RT_Object 	*obj = NULL;
 	RT_Vector3df vect(0, 0, 0);
 
 	for (auto i(_objects.begin()); i != _objects.end(); ++i) {
@@ -52,7 +52,7 @@ RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
 		inter.setDist(k);
 		obj->calcNormale(&vect, k, this->getCamera(), &inter);
 		inter.setColor(tmp_color);
-		inter.setColor(this->checkShadows(inter, this->checkLights(inter)));
+		inter.setColor(this->checkShadows(inter, this->checkLights(inter), obj));
 	}
 	return (inter);
 }
@@ -73,9 +73,9 @@ uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
 		cos_light = (inter.getNormale()._x * vect_light._x) + (inter.getNormale()._y * vect_light._y) + (inter.getNormale()._z * vect_light._z);
 		spec = ((-inter.getReflect()._x) * vect_light._x) + ((-inter.getReflect()._y) * vect_light._y) + ((-inter.getReflect()._z) * vect_light._z);
 		if (cos_light >= 0.000001) {
-			R += ((tmp_color & 0xff000000) >> 24) * cos_light;// + (255 * pow(spec, 0.5));
-			G += ((tmp_color & 0x00ff0000) >> 16) * cos_light;// + (255 * pow(spec, 0.5));
-			B += ((tmp_color & 0x0000ff00) >> 8) * cos_light;// + (255 * pow(spec, 0.5));
+			R += ((tmp_color & 0xff000000) >> 24) * cos_light;// +(255 * pow(spec, 0.5));
+			G += ((tmp_color & 0x00ff0000) >> 16) * cos_light;// +(255 * pow(spec, 0.5));
+			B += ((tmp_color & 0x0000ff00) >> 8) * cos_light;// +(255 * pow(spec, 0.5));
 		}
 	}
 	R /= _lights.size();
@@ -84,29 +84,26 @@ uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
 	return ((unsigned int)R << 24) + ((unsigned int)G << 16) + ((unsigned int)B << 8);
 }
 
-uint32_t	RT_Scene::checkShadows(RT_Intersec const &inter, uint32_t color) const
+uint32_t	RT_Scene::checkShadows(RT_Intersec const &inter, uint32_t color, RT_Object *obj) const
 {
 	RT_Vector3df vect;
 	float nb_inter = _lights.size();
 	float tmp = -1;
-	float R = ((color & 0xff000000) >> 24);
-	float G = ((color & 0x00ff0000) >> 16);
-	float B = ((color & 0x0000ff00) >> 8);
+	bool stop;
+
 	for (auto i(_lights.begin()); i != _lights.end(); ++i) {
+		stop = true;
 		vect.setValue((*i)->getPos()->_x - inter.getInter()._x, (*i)->getPos()->_y - inter.getInter()._y, (*i)->getPos()->_z - inter.getInter()._z);
-		vect.normalize();
+		//vect.normalize();
 		for (auto i(_objects.begin()); i != _objects.end(); ++i) {
-			tmp = (*i)->checkCollision(inter.getInter(), vect);
-			if (tmp > 0) {
+			if ((*i) != obj)
+				tmp = (*i)->checkCollision(inter.getInter(), vect);
+			if (tmp > 0 && tmp < 1 && stop == true) {
 				nb_inter--;
-				break;
+				stop = false;
 			}
 		}
 	}
-	R *= nb_inter / _lights.size();
-	G *= nb_inter / _lights.size();
-	B *= nb_inter / _lights.size();
-	return (color);
-	return ((unsigned int)R << 24) + ((unsigned int)G << 16) + ((unsigned int)B << 8);
+	return ((unsigned int)(((color & 0xff000000) >> 24) * (nb_inter / _lights.size())) << 24) + ((unsigned int)(((color & 0x00ff0000) >> 16) * (nb_inter / _lights.size())) << 16) + ((unsigned int)(((color & 0x0000ff00) >> 8) * (nb_inter / _lights.size())) << 8);
 
 }
