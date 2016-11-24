@@ -19,6 +19,7 @@ public:
 
 	RT_Intersec		checkCollisionAll(float x, float y) const;
 	uint32_t		checkLights(RT_Intersec const &inter) const;
+	uint32_t		checkShadows(RT_Intersec const &inter, uint32_t color) const;
 
 
 	RT_Vector3df	const &getCamera() const;
@@ -26,7 +27,7 @@ public:
 private:
 	RT_Vector3df				_camera;
 	std::vector<RT_Object *>	_objects;
-	std::vector<RT_Light>		_lights;
+	std::vector<RT_Light *>		_lights;
 };
 
 #endif // !RT_SCENE_H_

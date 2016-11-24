@@ -39,6 +39,9 @@
     <ClCompile Include="RT_Sphere.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="RT_Plane.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RT_Window.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="RT_Light.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Plane.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

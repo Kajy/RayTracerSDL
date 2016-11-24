@@ -3,6 +3,7 @@
 
 #include "RT_Vector3df.h"
 #include "RT_Intersec.h"
+#include "RT_Light.h"
 
 class RT_Object
 {

@@ -32,9 +32,11 @@ float	RT_Sphere::checkCollision(RT_Vector3df const &camera, RT_Vector3df const &
 void	RT_Sphere::calcNormale(RT_Vector3df *vect, float k, RT_Vector3df const &camera, RT_Intersec *inter) const
 {
 	inter->setInter((camera._x + (k * vect->_x)), (camera._y + (k * vect->_y)), (camera._z + (k * vect->_z)));
-	inter->setNormale(inter->getInter()->_x - _pos._x, inter->getInter()->_y - _pos._y, inter->getInter()->_z - _pos._z);
-	inter->getNormale()->normalize();
-	float	scal = vect->_x * inter->getNormale()->_x + vect->_y * inter->getNormale()->_y + vect->_z * inter->getNormale()->_z;
-	inter->setReflect(vect->_x - ((2 * scal) * inter->getNormale()->_x), vect->_y - ((2 * scal) * inter->getNormale()->_y), vect->_z - ((2 * scal) * inter->getNormale()->_z));
-	inter->getReflect()->normalize();
+	RT_Vector3df tmp(inter->getInter()._x - _pos._x, inter->getInter()._y - _pos._y, inter->getInter()._z - _pos._z);
+	inter->setNormale(tmp._x, tmp._y, tmp._z);
+	float	scal = vect->_x * inter->getNormale()._x + vect->_y * inter->getNormale()._y + vect->_z * inter->getNormale()._z;
+	inter->setReflect(vect->_x - ((2 * scal) * inter->getNormale()._x), vect->_y - ((2 * scal) * inter->getNormale()._y), vect->_z - ((2 * scal) * inter->getNormale()._z));
+	tmp = inter->getReflect();
+	inter->setReflect(tmp._x, tmp._y, tmp._z);
 }
+

@@ -28,7 +28,7 @@ public:
 	}
 
 	void	normalize() {
-		float norm = sqrt((_x * _x) + (_y * _y) + (_z * _z));
+		float norm = sqrtf((_x * _x) + (_y * _y) + (_z * _z));
 		_x /= norm;
 		_y /= norm;
 		_z /= norm;

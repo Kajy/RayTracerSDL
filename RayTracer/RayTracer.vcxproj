@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="RT_Plane.cpp" />
     <ClCompile Include="RT_Window.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RT_Pixel.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="RT_Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RT_Plane.h" />
     <ClInclude Include="RT_Light.h" />
     <ClInclude Include="RT_Intersec.h" />
     <ClInclude Include="RT_Sphere.h" />
