@@ -74,5 +74,8 @@
     <ClInclude Include="RT_Plane.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="RT_Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

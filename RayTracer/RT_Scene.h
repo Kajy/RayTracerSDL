@@ -5,6 +5,7 @@
 #include "RT_Object.h"
 #include "RT_Light.h"
 #include "RT_Vector3df.h"
+#include "RT_Color.h"
 
 
 class RT_Scene
@@ -20,7 +21,7 @@ public:
 	RT_Intersec		checkCollisionAll(float x, float y) const;
 	uint32_t		checkLights(RT_Intersec const &inter) const;
 	uint32_t		checkShadows(RT_Intersec const &inter, uint32_t color, RT_Object *obj) const;
-	float			calcSpec(RT_Intersec const &inter, RT_Vector3df const &lightPos) const;
+	float			calcSpecular(RT_Intersec const &inter, RT_Vector3df const &lightVect) const;
 
 
 	RT_Vector3df	const &getCamera() const;

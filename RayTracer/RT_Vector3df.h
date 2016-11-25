@@ -34,6 +34,10 @@ public:
 		_z /= norm;
 	}
 
+	float	prodScalaire(RT_Vector3df v2) {
+		return ((_x * v2._x) + (_y * v2._y) + (_z * v2._z));
+	}
+
 public:
 	float	_x;
 	float	_y;

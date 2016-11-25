@@ -59,32 +59,22 @@ RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
 
 uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
 {
-	float			cos_light = 0, cos_spec = 0, tmp;
+	float			cos_light = 0;
 	float			spec = 0;
 	RT_Vector3df	vect_light;
+	RT_Color		FinalColor(COLOR_BACKGROUND), ColorTmp;
+	float			R_tmp, G_tmp, B_tmp;
 
 	uint32_t tmp_color = inter.getColor();
-	float R = ((COLOR_BACKGROUND & 0xff000000) >> 24);
-	float G = ((COLOR_BACKGROUND & 0x00ff0000) >> 16);
-	float B = ((COLOR_BACKGROUND & 0x0000ff00) >> 8);
-	for (auto i(_lights.begin()); i != _lights.end(); ++i) {
-		vect_light.setValue((*i)->getPos()._x - inter.getInter()._x, (*i)->getPos()._y - inter.getInter()._y, (*i)->getPos()._z - inter.getInter()._z);
+	for (auto const &i : _lights) {
+		vect_light.setValue(i->getPos()._x - inter.getInter()._x, i->getPos()._y - inter.getInter()._y, i->getPos()._z - inter.getInter()._z);
 		vect_light.normalize();
-		cos_light = (inter.getNormale()._x * vect_light._x) + (inter.getNormale()._y * vect_light._y) + (inter.getNormale()._z * vect_light._z);
-		//cos_light += calcSpec(inter, (*i)->getPos());
-		if (cos_light >= 0.000001) {
-			R += ((tmp_color & 0xff000000) >> 24) * cos_light + (255 * pow(cos_light, 50));
-			G += ((tmp_color & 0x00ff0000) >> 16) * cos_light + (255 * pow(cos_light, 50));
-			B += ((tmp_color & 0x0000ff00) >> 8) * cos_light + (255 * pow(cos_light, 50));
-		}
+		cos_light = MAX(0, (inter.getNormale()._x * vect_light._x) + (inter.getNormale()._y * vect_light._y) + (inter.getNormale()._z * vect_light._z));
+		ColorTmp.tranformColorWithLightsCoef(tmp_color, i->getColor(), cos_light);
+		FinalColor.addColor(ColorTmp.getR(), ColorTmp.getG(), ColorTmp.getB());
 	}
-	R /= _lights.size();
-	G /= _lights.size();
-	B /= _lights.size();
-	R = R > 255 ? 255 : R;
-	B = B > 255 ? 255 : B;
-	G = G > 255 ? 255 : G;
-	return ((unsigned int)R << 24) + ((unsigned int)G << 16) + ((unsigned int)B << 8);
+	FinalColor.divColor(_lights.size());
+	return (FinalColor.getColor());
 }
 
 uint32_t	RT_Scene::checkShadows(RT_Intersec const &inter, uint32_t color, RT_Object *obj) const
@@ -94,35 +84,20 @@ uint32_t	RT_Scene::checkShadows(RT_Intersec const &inter, uint32_t color, RT_Obj
 	float tmp = -1;
 	bool stop;
 
-	for (auto i(_lights.begin()); i != _lights.end(); ++i) {
+	for (auto const &i : _lights) {
 		stop = true;
-		vect.setValue((*i)->getPos()._x - inter.getInter()._x, (*i)->getPos()._y - inter.getInter()._y, (*i)->getPos()._z - inter.getInter()._z);
-		//vect.normalize();
-		for (auto i(_objects.begin()); i != _objects.end(); ++i) {
-			if ((*i) != obj)
-				tmp = (*i)->checkCollision(inter.getInter(), vect);
+		vect.setValue(i->getPos()._x - inter.getInter()._x, i->getPos()._y - inter.getInter()._y, i->getPos()._z - inter.getInter()._z);
+		for (auto const &i : _objects) {
+			if (i != obj)
+				tmp = i->checkCollision(inter.getInter(), vect);
 			if (tmp > 0 && tmp < 1 && stop == true) {
 				nb_inter--;
 				stop = false;
 			}
 		}
 	}
-	return ((unsigned int)(((color & 0xff000000) >> 24) * (nb_inter / _lights.size())) << 24) + ((unsigned int)(((color & 0x00ff0000) >> 16) * (nb_inter / _lights.size())) << 16) + ((unsigned int)(((color & 0x0000ff00) >> 8) * (nb_inter / _lights.size())) << 8);
+	return ((unsigned int)(((color & 0xff000000) >> 24) * (nb_inter / _lights.size())) << 24)
+			+ ((unsigned int)(((color & 0x00ff0000) >> 16) * (nb_inter / _lights.size())) << 16)
+			+ ((unsigned int)(((color & 0x0000ff00) >> 8) * (nb_inter / _lights.size())) << 8);
 
-}
-
-float		RT_Scene::calcSpec(RT_Intersec const &inter, RT_Vector3df const &lightPos) const
-{
-	RT_Vector3df	vect_light(lightPos._x - inter.getInter()._x, lightPos._y - inter.getInter()._y, lightPos._z - inter.getInter()._z);
-
-	float	Scal = (inter.getNormale()._x * vect_light._x) + (inter.getNormale()._y * vect_light._y) + (inter.getNormale()._z * vect_light._z);
-
-	float	x = (2 * Scal * inter.getNormale()._x) - vect_light._x;
-	float	y = (2 * Scal * inter.getNormale()._y) - vect_light._y;
-	float	z = (2 * Scal * inter.getNormale()._z) - vect_light._z;
-
-	RT_Vector3df	vect_reflect(x, y, z);
-	RT_Vector3df	vect_cam(this->getCamera()._x - inter.getInter()._x, this->getCamera()._y - inter.getInter()._y, this->getCamera()._z - inter.getInter()._z);
-
-	return ((vect_reflect._x * vect_cam._x) + (vect_reflect._y * vect_cam._y) + (vect_reflect._z * vect_cam._z));
 }

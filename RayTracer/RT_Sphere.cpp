@@ -34,5 +34,12 @@ void	RT_Sphere::calcNormale(RT_Vector3df *vect, float k, RT_Vector3df const &cam
 	inter->setInter((camera._x + (k * vect->_x)), (camera._y + (k * vect->_y)), (camera._z + (k * vect->_z)));
 	RT_Vector3df tmp(inter->getInter()._x - _pos._x, inter->getInter()._y - _pos._y, inter->getInter()._z - _pos._z);
 	inter->setNormale(tmp._x, tmp._y, tmp._z);
+	vect->normalize();
+	float scal = vect->prodScalaire(inter->getNormale());
+
+	float x = vect->_x - (2 * scal * inter->getNormale()._x);
+	float y = vect->_y - (2 * scal * inter->getNormale()._y);
+	float z = vect->_z - (2 * scal * inter->getNormale()._z);
+
 }
 
