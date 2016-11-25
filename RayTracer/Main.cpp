@@ -63,30 +63,27 @@ void	test_shadow(RT_Scene *scene)
 	scene->addObjectOnScene(testSphere);
 	scene->addObjectOnScene(testSphere2);
 	scene->addObjectOnScene(testPlane);
+	scene->addLightOnScene(-200, 50, 40, 0xFFFFFFFF);
+	scene->addLightOnScene(-200, -50, 50, 0xFFFFFFFF);
 	//scene->addLightOnScene(-200, -50, 50, 0xFFFFFFFF);
 }
 
-int main(int ac, char **av)
+void	test_antialiasing(RT_Scene *scene)
 {
-	RT_Window	window("Raytracer", RES_X, RES_Y);
+	RT_Sphere	*testSphere = new RT_Sphere(0, 0, 0, 15, 0xFFFF0000);
+	RT_Sphere	*testSphere2 = new RT_Sphere(1000, 0, 0, 100, 0xFFFFFFFFF);
 
-	RT_Pixel	pixel(&window);
-	RT_Scene	scene;
-
-	scene.setCamera(-700, 0, 10);
-	
-	scene.addLightOnScene(-200, 50, 40, 0xFFFFFFFF);
-	scene.addLightOnScene(-200, -50, 50, 0xFFFFFFFF);
-	//scene.addLightOnScene(0, -70, 0, 0xFFFFFFFF);
-	
-	//test_light(&scene);
-	test_shadow(&scene);
-
+	scene->addObjectOnScene(testSphere);
+	scene->addObjectOnScene(testSphere2);
+	scene->addLightOnScene(-1500, 0, 0, 0xFFFFFFFF);
+}
+void	calcAll(RT_Scene const &scene, RT_Pixel &pixel, int antialiasing)
+{
 	for (int x = 0; x < RES_X; ++x)
 	{
 		for (int y = 0; y < RES_Y; ++y)
 		{
-			if (ANTIALIASING == 1) {
+			if (antialiasing == 1) {
 				RT_Intersec inter = scene.checkCollisionAll(x, y);
 				pixel.setColor(inter.getColor());
 			}
@@ -97,10 +94,31 @@ int main(int ac, char **av)
 		}
 	}
 	SDL_RenderPresent(pixel.getRenderer());
+}
+
+int		main(int ac, char **av)
+{
+	RT_Window	window("Raytracer", RES_X, RES_Y);
+
+	RT_Pixel	pixel(&window);
+	RT_Scene	scene;
+
+	scene.setCamera(-500, 0, 0);
+	
+	//test_light(&scene);
+	test_shadow(&scene);
+	//test_antialiasing(&scene);
+
+	calcAll(scene, pixel, 1);
+	bool calc = false;
 	while (1) {
 		window.waitEvent();
 		if (window.checkEvent(SDL_WINDOWEVENT_CLOSE))
 			return (1);
+		if (calc == false) {
+			calcAll(scene, pixel, ANTIALIASING);
+			calc = true;
+		}
 	}
 	return (0);
 }

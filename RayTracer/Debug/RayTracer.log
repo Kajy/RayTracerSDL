@@ -1,1 +1,18 @@
-﻿
+﻿  Main.cpp
+c:\users\182324\desktop\raytracersdl\raytracer\main.cpp(11): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\182324\desktop\raytracersdl\raytracer\main.cpp(12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\182324\desktop\raytracersdl\raytracer\main.cpp(74): warning C4305: 'argument': truncation from '__int64' to 'uint32_t'
+c:\users\182324\desktop\raytracersdl\raytracer\main.cpp(74): warning C4309: 'argument': truncation of constant value
+c:\users\182324\desktop\raytracersdl\raytracer\main.cpp(87): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  RT_Window.cpp
+  RT_Sphere.cpp
+  RT_Scene.cpp
+c:\users\182324\desktop\raytracersdl\raytracer\rt_scene.cpp(62): warning C4101: 'tmp': unreferenced local variable
+c:\users\182324\desktop\raytracersdl\raytracer\rt_scene.cpp(93): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+  RT_Plane.cpp
+  RT_Pixel.cpp
+  Generating Code...
+  RayTracer.vcxproj -> C:\Users\182324\Desktop\RayTracerSDL\Debug\RayTracer.exe
+  RayTracer.vcxproj -> C:\Users\182324\Desktop\RayTracerSDL\Debug\RayTracer.pdb (Full PDB)
