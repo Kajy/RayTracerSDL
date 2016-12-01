@@ -71,13 +71,13 @@ public:
 		return (((unsigned int)(_Rf) << 24) + ((unsigned int)(_Gf)  << 16) + ((unsigned int)(_Bf) << 8));
 	}
 
-	void		tranformColorWithLightsCoef(uint32_t colorBase, uint32_t colorLight, float LightCoef) {
-		_Rf = ((colorBase & 0xff000000) >> 24) * LightCoef + (((colorLight & 0xff000000) >> 24) * pow(LightCoef, 50));
-		_Bf = ((colorBase & 0x00ff0000) >> 16) * LightCoef + (((colorLight & 0x00ff0000) >> 16) * pow(LightCoef, 50));
-		_Gf = ((colorBase & 0x0000ff00) >> 8) * LightCoef + (((colorLight & 0x0000ff00) >> 8) * pow(LightCoef, 50));
-		_Rf = _Rf > 255 ? 255 : _Rf;
+	void		tranformColorWithLightsCoef(uint32_t colorBase, uint32_t colorLight, float LightCoef, float ReflectCoef) {
+		_Rf = ((colorBase & 0xff000000) >> 24) * LightCoef + ((((colorLight & 0xff000000) - (colorBase & 0xff000000)) >> 24) * ReflectCoef);
+		_Bf = ((colorBase & 0x00ff0000) >> 16) * LightCoef + ((((colorLight & 0x00ff0000) - (colorBase & 0x00ff0000)) >> 16) * ReflectCoef);
+		_Gf = ((colorBase & 0x0000ff00) >> 8) * LightCoef + ((((colorLight & 0x0000ff00) - (colorBase & 0x0000ff00)) >> 8) * ReflectCoef);
+		/*_Rf = _Rf > 255 ? 255 : _Rf;
 		_Gf = _Gf > 255 ? 255 : _Gf;
-		_Bf = _Bf > 255 ? 255 : _Bf;
+		_Bf = _Bf > 255 ? 255 : _Bf;*/
 	}
 
 	float	getR() const { return _Rf; }

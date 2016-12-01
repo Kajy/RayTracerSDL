@@ -52,14 +52,14 @@ RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
 		inter.setDist(k);
 		obj->calcNormale(&vect, k, this->getCamera(), &inter);
 		inter.setColor(tmp_color);
-		inter.setColor(this->checkShadows(inter, this->checkLights(inter), obj));
+		inter.setColor(/*this->checkShadows(inter, */this->checkLights(inter)/*, obj)*/);
 	}
 	return (inter);
 }
 
 uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
 {
-	float			cos_light = 0;
+	float			cos_light = 0, cos_reflect = 0;
 	float			spec = 0;
 	RT_Vector3df	vect_light;
 	RT_Color		FinalColor(COLOR_BACKGROUND), ColorTmp;
@@ -70,7 +70,8 @@ uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
 		vect_light.setValue(i->getPos()._x - inter.getInter()._x, i->getPos()._y - inter.getInter()._y, i->getPos()._z - inter.getInter()._z);
 		vect_light.normalize();
 		cos_light = MAX(0, (inter.getNormale()._x * vect_light._x) + (inter.getNormale()._y * vect_light._y) + (inter.getNormale()._z * vect_light._z));
-		ColorTmp.tranformColorWithLightsCoef(tmp_color, i->getColor(), cos_light);
+		cos_reflect = MAX(0, (inter.getReflect()._x * vect_light._x) + (inter.getReflect()._y * vect_light._y) + (inter.getReflect()._z * vect_light._z));
+		ColorTmp.tranformColorWithLightsCoef(tmp_color, i->getColor(), cos_light, pow(cos_reflect, 48));
 		FinalColor.addColor(ColorTmp.getR(), ColorTmp.getG(), ColorTmp.getB());
 	}
 	FinalColor.divColor(_lights.size());
@@ -82,22 +83,22 @@ uint32_t	RT_Scene::checkShadows(RT_Intersec const &inter, uint32_t color, RT_Obj
 	RT_Vector3df vect;
 	float nb_inter = _lights.size();
 	float tmp = -1;
-	bool stop;
+	RT_Color	FinalColorShadow(color);
+	bool stop = false;
 
 	for (auto const &i : _lights) {
-		stop = true;
+		stop = false;
 		vect.setValue(i->getPos()._x - inter.getInter()._x, i->getPos()._y - inter.getInter()._y, i->getPos()._z - inter.getInter()._z);
 		for (auto const &i : _objects) {
-			if (i != obj)
+			if (i != obj) {
 				tmp = i->checkCollision(inter.getInter(), vect);
-			if (tmp > 0 && tmp < 1 && stop == true) {
-				nb_inter--;
-				stop = false;
+				if (tmp > 0 && tmp < 1 && stop == false) {
+					nb_inter--;
+					stop = true;
+				}
 			}
 		}
 	}
-	return ((unsigned int)(((color & 0xff000000) >> 24) * (nb_inter / _lights.size())) << 24)
-			+ ((unsigned int)(((color & 0x00ff0000) >> 16) * (nb_inter / _lights.size())) << 16)
-			+ ((unsigned int)(((color & 0x0000ff00) >> 8) * (nb_inter / _lights.size())) << 8);
-
+	FinalColorShadow.mulColor(nb_inter / _lights.size());
+	return (FinalColorShadow.getColor());
 }

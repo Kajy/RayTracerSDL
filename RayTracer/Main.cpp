@@ -99,9 +99,13 @@ void	calcAll(RT_Scene const &scene, RT_Pixel &pixel, int antialiasing)
 void	test_specular(RT_Scene *scene)
 {
 	RT_Sphere	*testSphere = new RT_Sphere(0, 0, 0, 10, 0xFF000000);
-	RT_Plane	*testPlane = new RT_Plane(0, 0, 1, -20, 0xFFFFFFFF);
+	RT_Sphere	*testSphere2 = new RT_Sphere(-50, 20, 20, 5, 0xFFFF0000);
+	RT_Sphere	*testSphere3 = new RT_Sphere(0, -30, 10, 3, 0x0000FF00);
+	RT_Plane	*testPlane = new RT_Plane(0, 0, 1, -15, 0xFFFFFFFF);
 
 	scene->addObjectOnScene(testSphere);
+	scene->addObjectOnScene(testSphere2);
+	scene->addObjectOnScene(testSphere3);
 	scene->addObjectOnScene(testPlane);
 	scene->addLightOnScene(-100, 50, 40, 0xFFFFFFFF);
 }

@@ -41,5 +41,6 @@ void	RT_Sphere::calcNormale(RT_Vector3df *vect, float k, RT_Vector3df const &cam
 	float y = vect->_y - (2 * scal * inter->getNormale()._y);
 	float z = vect->_z - (2 * scal * inter->getNormale()._z);
 
+	inter->setReflect(x, y, z);
 }
 
