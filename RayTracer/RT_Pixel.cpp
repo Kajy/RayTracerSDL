@@ -3,6 +3,7 @@
 RT_Pixel::RT_Pixel(RT_Window *window)
 {
 	_Renderer = SDL_CreateRenderer(window->getWindow(), 0, SDL_RENDERER_ACCELERATED);
+	//_Renderer = SDL_GetRenderer(window->getWindow());
 	_Window = window;
 	_color = 0;
 	_x = 0;

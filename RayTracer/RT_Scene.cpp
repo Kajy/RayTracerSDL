@@ -24,6 +24,12 @@ void	RT_Scene::addLightOnScene(float x, float y, float z, uint32_t color)
 	_lights.push_back(new_light);
 }
 
+void	RT_Scene::addLightOnScene(float x, float y, float z, uint32_t color, float diffuse)
+{
+	RT_Light *new_light = new RT_Light(x, y, z, color, diffuse);
+	_lights.push_back(new_light);
+}
+
 RT_Vector3df const  &RT_Scene::getCamera() const
 {
 	return (_camera);
@@ -71,7 +77,7 @@ uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
 		vect_light.normalize();
 		cos_light = MAX(0, (inter.getNormale()._x * vect_light._x) + (inter.getNormale()._y * vect_light._y) + (inter.getNormale()._z * vect_light._z));
 		cos_reflect = MAX(0, (inter.getReflect()._x * vect_light._x) + (inter.getReflect()._y * vect_light._y) + (inter.getReflect()._z * vect_light._z));
-		ColorTmp.tranformColorWithLightsCoef(tmp_color, i->getColor(), cos_light, pow(cos_reflect, 48));
+		ColorTmp.tranformColorWithLightsCoef(tmp_color, *i, cos_light, pow(cos_reflect, 48));
 		FinalColor.addColor(ColorTmp.getR(), ColorTmp.getG(), ColorTmp.getB());
 	}
 	FinalColor.divColor(_lights.size());

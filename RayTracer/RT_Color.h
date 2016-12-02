@@ -71,13 +71,10 @@ public:
 		return (((unsigned int)(_Rf) << 24) + ((unsigned int)(_Gf)  << 16) + ((unsigned int)(_Bf) << 8));
 	}
 
-	void		tranformColorWithLightsCoef(uint32_t colorBase, uint32_t colorLight, float LightCoef, float ReflectCoef) {
-		_Rf = ((colorBase & 0xff000000) >> 24) * LightCoef + ((((colorLight & 0xff000000) - (colorBase & 0xff000000)) >> 24) * ReflectCoef);
-		_Bf = ((colorBase & 0x00ff0000) >> 16) * LightCoef + ((((colorLight & 0x00ff0000) - (colorBase & 0x00ff0000)) >> 16) * ReflectCoef);
-		_Gf = ((colorBase & 0x0000ff00) >> 8) * LightCoef + ((((colorLight & 0x0000ff00) - (colorBase & 0x0000ff00)) >> 8) * ReflectCoef);
-		/*_Rf = _Rf > 255 ? 255 : _Rf;
-		_Gf = _Gf > 255 ? 255 : _Gf;
-		_Bf = _Bf > 255 ? 255 : _Bf;*/
+	void		tranformColorWithLightsCoef(uint32_t colorBase, RT_Light const &light, float LightCoef, float ReflectCoef) {
+		_Rf = (((colorBase & 0xff000000) >> 24) * LightCoef + ((((light.getColor() & 0xff000000) - (colorBase & 0xff000000)) >> 24) * ReflectCoef))  * light.getDiffuseCoef();
+		_Bf = (((colorBase & 0x00ff0000) >> 16) * LightCoef + ((((light.getColor() & 0x00ff0000) - (colorBase & 0x00ff0000)) >> 16) * ReflectCoef)) * light.getDiffuseCoef();
+		_Gf = (((colorBase & 0x0000ff00) >> 8) * LightCoef + ((((light.getColor() & 0x0000ff00) - (colorBase & 0x0000ff00)) >> 8) * ReflectCoef)) * light.getDiffuseCoef();
 	}
 
 	float	getR() const { return _Rf; }

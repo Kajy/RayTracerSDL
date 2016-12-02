@@ -16,7 +16,9 @@ public:
 
 	void			setCamera(float x, float y, float z);
 	void			addObjectOnScene(RT_Object *obj);
+
 	void			addLightOnScene(float x, float y, float z, uint32_t color);
+	void			addLightOnScene(float x, float y, float z, uint32_t color, float diffuse);
 
 	RT_Intersec		checkCollisionAll(float x, float y) const;
 	uint32_t		checkLights(RT_Intersec const &inter) const;

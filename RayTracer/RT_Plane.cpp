@@ -3,7 +3,7 @@
 float	RT_Plane::checkCollision(RT_Vector3df const &camera, RT_Vector3df const &vect) const
 {
 	if (vect._z != 0) {
-		float k = - (camera._z - _hight) / (_X * vect._x + _Y * vect._y + _Z * vect._z);
+		float k = - ((_X * camera._x) + (_Y * camera._y) + (_Z * camera._z)) / (_X * vect._x + _Y * vect._y + _Z * vect._z);
 
 		if (k >= 0)
 			return (k);

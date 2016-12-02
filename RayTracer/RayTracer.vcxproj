@@ -173,6 +173,7 @@
     <ClCompile Include="RT_Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RT_Screen.h" />
     <ClInclude Include="RT_Color.h" />
     <ClInclude Include="RT_Plane.h" />
     <ClInclude Include="RT_Light.h" />
