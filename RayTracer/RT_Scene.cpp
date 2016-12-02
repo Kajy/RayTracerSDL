@@ -1,48 +1,48 @@
 #include "RT_Scene.h"
 
-RT_Scene::RT_Scene()
+RT::Scene::Scene()
 {
 }
 
-RT_Scene::~RT_Scene()
+RT::Scene::~Scene()
 {
 }
 
-void	RT_Scene::setCamera(float x, float y, float z)
+void	RT::Scene::setCamera(float x, float y, float z)
 {
 	_camera.setValue(x, y, z);
 }
 
-void	RT_Scene::addObjectOnScene(RT_Object *obj)
+void	RT::Scene::addObjectOnScene(RT::Object *obj)
 {
 	_objects.push_back(obj);
 }
 
-void	RT_Scene::addLightOnScene(float x, float y, float z, uint32_t color)
+void	RT::Scene::addLightOnScene(float x, float y, float z, uint32_t color)
 {
-	RT_Light *new_light = new RT_Light(x, y, z, color);
+	RT::Light *new_light = new RT::Light(x, y, z, color);
 	_lights.push_back(new_light);
 }
 
-void	RT_Scene::addLightOnScene(float x, float y, float z, uint32_t color, float diffuse)
+void	RT::Scene::addLightOnScene(float x, float y, float z, uint32_t color, float diffuse)
 {
-	RT_Light *new_light = new RT_Light(x, y, z, color, diffuse);
+	RT::Light *new_light = new RT::Light(x, y, z, color, diffuse);
 	_lights.push_back(new_light);
 }
 
-RT_Vector3df const  &RT_Scene::getCamera() const
+RT::Vector3df const  &RT::Scene::getCamera() const
 {
 	return (_camera);
 }
 
-RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
+RT::Intersec		RT::Scene::checkCollisionAll(float x, float y) const
 {
 	float		k = -1;
 	float		tmp = -1;
 	uint32_t	tmp_color = 0;
-	RT_Intersec inter;
-	RT_Object 	*obj = NULL;
-	RT_Vector3df vect(0, 0, 0);
+	RT::Intersec inter;
+	RT::Object 	*obj = NULL;
+	RT::Vector3df vect(0, 0, 0);
 
 	for (auto i(_objects.begin()); i != _objects.end(); ++i) {
 		vect.setValue(FOV - this->getCamera()._x - (*i)->getPos()._x, ((RES_X / 2) - x) - this->getCamera()._y - (*i)->getPos()._y, ((RES_Y / 2) - y) - this->getCamera()._z - (*i)->getPos()._z);
@@ -63,12 +63,12 @@ RT_Intersec		RT_Scene::checkCollisionAll(float x, float y) const
 	return (inter);
 }
 
-uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
+uint32_t		RT::Scene::checkLights(RT::Intersec const &inter) const
 {
 	float			cos_light = 0, cos_reflect = 0;
 	float			spec = 0;
-	RT_Vector3df	vect_light;
-	RT_Color		FinalColor(COLOR_BACKGROUND), ColorTmp;
+	RT::Vector3df	vect_light;
+	RT::Color		FinalColor(COLOR_BACKGROUND), ColorTmp;
 	float			R_tmp, G_tmp, B_tmp;
 
 	uint32_t tmp_color = inter.getColor();
@@ -84,12 +84,12 @@ uint32_t		RT_Scene::checkLights(RT_Intersec const &inter) const
 	return (FinalColor.getColor());
 }
 
-uint32_t	RT_Scene::checkShadows(RT_Intersec const &inter, uint32_t color, RT_Object *obj) const
+uint32_t	RT::Scene::checkShadows(RT::Intersec const &inter, uint32_t color, RT::Object *obj) const
 {
-	RT_Vector3df vect;
+	RT::Vector3df vect;
 	float nb_inter = _lights.size();
 	float tmp = -1;
-	RT_Color	FinalColorShadow(color);
+	RT::Color	FinalColorShadow(color);
 	bool stop = false;
 
 	for (auto const &i : _lights) {

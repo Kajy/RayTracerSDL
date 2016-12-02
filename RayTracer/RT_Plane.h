@@ -6,27 +6,30 @@
 #include "RT_Intersec.h"
 #include "RT_Light.h"
 
-class RT_Plane : public RT_Object
-{
-public:
-	RT_Plane(float X, float Y, float Z, float h, uint32_t color) :
-		_X(X),
-		_Y(Y),
-		_Z(Z),
-		_hight(h)
+namespace RT {
+
+	class Plane : public Object
 	{
-		_color = color;
-	}
-	~RT_Plane() {};
+	public:
+		Plane(float X, float Y, float Z, float h, uint32_t color) :
+			_X(X),
+			_Y(Y),
+			_Z(Z),
+			_hight(h)
+		{
+			_color = color;
+		}
+		~Plane() {};
 
-	float		checkCollision(RT_Vector3df const &camera, RT_Vector3df const &vect) const;
-	void		calcNormale(RT_Vector3df *vect, float k, RT_Vector3df const &camera, RT_Intersec *inter) const;
+		float		checkCollision(RT::Vector3df const &camera, RT::Vector3df const &vect) const;
+		void		calcNormale(RT::Vector3df *vect, float k, RT::Vector3df const &camera, RT::Intersec *inter) const;
 
-private:
-	float	_X;
-	float	_Y;
-	float	_Z;
-	float	_hight;
-};
+	private:
+		float	_X;
+		float	_Y;
+		float	_Z;
+		float	_hight;
+	};
+}
 
 #endif // !RT_PLANE_H_

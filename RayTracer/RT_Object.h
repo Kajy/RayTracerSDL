@@ -5,20 +5,23 @@
 #include "RT_Intersec.h"
 #include "RT_Light.h"
 
-class RT_Object
-{
-public:
-	virtual ~RT_Object() {};
+namespace RT {
 
-	virtual	float		checkCollision(RT_Vector3df const &camera, RT_Vector3df const &vect) const = 0;
-	virtual void		calcNormale(RT_Vector3df *vect, float k, RT_Vector3df const &camera, RT_Intersec *inter) const = 0;
-	uint32_t			getColor() const { return _color; }
-	RT_Vector3df const	&getPos() const { return _pos; }
+	class Object
+	{
+	public:
+		virtual ~Object() {};
 
-protected:
-	RT_Vector3df		_pos;
-	uint32_t			_color;
-	float				_shine;
-};
+		virtual	float		checkCollision(RT::Vector3df const &camera, RT::Vector3df const &vect) const = 0;
+		virtual void		calcNormale(RT::Vector3df *vect, float k, RT::Vector3df const &camera, RT::Intersec *inter) const = 0;
+		uint32_t			getColor() const { return _color; }
+		RT::Vector3df const	&getPos() const { return _pos; }
+
+	protected:
+		RT::Vector3df		_pos;
+		uint32_t			_color;
+		float				_shine;
+	};
+}
 
 #endif // !RT_OBJECT_H_

@@ -2,7 +2,7 @@
 
 
 
-RT_Window::RT_Window(const std::string title, int x, int y)
+RT::Window::Window(const std::string title, int x, int y)
 {
 	_Done = false;
 	_Event = new SDL_Event();
@@ -28,20 +28,20 @@ RT_Window::RT_Window(const std::string title, int x, int y)
 }
 
 
-RT_Window::~RT_Window()
+RT::Window::~Window()
 {
 }
 
-void	RT_Window::waitEvent() const
+void	RT::Window::waitEvent() const
 {
 	SDL_WaitEvent(_Event);
 }
-bool	RT_Window::checkEvent(SDL_WindowEventID id) const
+bool	RT::Window::checkEvent(SDL_WindowEventID id) const
 {
 	return (_Event->window.event == id);
 }
 
-SDL_Window	*RT_Window::getWindow() const
+SDL_Window	*RT::Window::getWindow() const
 {
 	return (_Window);
 }

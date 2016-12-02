@@ -6,17 +6,20 @@
 #include "RT_Intersec.h"
 #include "RT_Light.h"
 
-class RT_Sphere : public RT_Object
-{
-public:
-	RT_Sphere(float x, float y, float z, float radius, uint32_t color);
-	~RT_Sphere();
+namespace RT {
 
-	float		checkCollision(RT_Vector3df const &camera, RT_Vector3df const &vect) const;
-	void		calcNormale(RT_Vector3df *vect, float k, RT_Vector3df const &camera, RT_Intersec *inter) const;
+	class Sphere : public Object
+	{
+	public:
+		Sphere(float x, float y, float z, float radius, uint32_t color);
+		~Sphere();
 
-private:
-	float _radius;
-};
+		float		checkCollision(RT::Vector3df const &camera, RT::Vector3df const &vect) const;
+		void		calcNormale(RT::Vector3df *vect, float k, RT::Vector3df const &camera, RT::Intersec *inter) const;
+
+	private:
+		float _radius;
+	};
+}
 
 #endif // !RT_SPHERE_H_

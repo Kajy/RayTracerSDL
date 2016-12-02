@@ -16,11 +16,20 @@
     <Filter Include="Source Files\Class">
       <UniqueIdentifier>{6482776b-cf6a-4885-9c13-168ed93ce5cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Objects">
-      <UniqueIdentifier>{386bec7a-bd08-417b-9834-0a0c139a4d08}</UniqueIdentifier>
+    <Filter Include="Header Files\Image">
+      <UniqueIdentifier>{14256450-ae90-4e8e-9b6b-9b7aff655b41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Objects">
+    <Filter Include="Header Files\Light">
+      <UniqueIdentifier>{2e77ae8c-9355-4669-8776-4868c3bdd16a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{cbc66a4b-078a-4e73-be23-7aba6484d2a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shapes">
       <UniqueIdentifier>{4b2de22e-1c09-411f-889d-1692801537b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shapes">
+      <UniqueIdentifier>{386bec7a-bd08-417b-9834-0a0c139a4d08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,48 +46,48 @@
       <Filter>Source Files\Class</Filter>
     </ClCompile>
     <ClCompile Include="RT_Sphere.cpp">
-      <Filter>Source Files\Objects</Filter>
+      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="RT_Plane.cpp">
-      <Filter>Source Files\Objects</Filter>
+      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RT_Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Pixel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Vector3df.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RT_Object.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Scene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="RT_Sphere.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Intersec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Light.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="RT_Plane.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Color.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="RT_Screen.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Window.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Scene.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Pixel.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Light.h">
+      <Filter>Header Files\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Color.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Intersec.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Vector3df.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

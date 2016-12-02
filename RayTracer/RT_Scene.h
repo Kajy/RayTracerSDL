@@ -7,30 +7,33 @@
 #include "RT_Vector3df.h"
 #include "RT_Color.h"
 
+namespace RT {
 
-class RT_Scene
-{
-public:
-	RT_Scene();
-	~RT_Scene();
+	class Scene
+	{
+	public:
+		Scene();
+		~Scene();
 
-	void			setCamera(float x, float y, float z);
-	void			addObjectOnScene(RT_Object *obj);
+		void			setCamera(float x, float y, float z);
+		void			addObjectOnScene(RT::Object *obj);
 
-	void			addLightOnScene(float x, float y, float z, uint32_t color);
-	void			addLightOnScene(float x, float y, float z, uint32_t color, float diffuse);
+		void			addLightOnScene(float x, float y, float z, uint32_t color);
+		void			addLightOnScene(float x, float y, float z, uint32_t color, float diffuse);
 
-	RT_Intersec		checkCollisionAll(float x, float y) const;
-	uint32_t		checkLights(RT_Intersec const &inter) const;
-	uint32_t		checkShadows(RT_Intersec const &inter, uint32_t color, RT_Object *obj) const;
+		RT::Intersec		checkCollisionAll(float x, float y) const;
+		uint32_t		checkLights(RT::Intersec const &inter) const;
+		uint32_t		checkShadows(RT::Intersec const &inter, uint32_t color, RT::Object *obj) const;
 
 
-	RT_Vector3df	const &getCamera() const;
+		RT::Vector3df	const &getCamera() const;
 
-private:
-	RT_Vector3df				_camera;
-	std::vector<RT_Object *>	_objects;
-	std::vector<RT_Light *>		_lights;
-};
+	private:
+		RT::Vector3df				_camera;
+		std::vector<RT::Object *>	_objects;
+		std::vector<RT::Light *>		_lights;
+	};
+
+}
 
 #endif // !RT_SCENE_H_

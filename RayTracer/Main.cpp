@@ -7,16 +7,16 @@
 
 typedef struct dataThread
 {
-	RT_Window	*window;
-	RT_Scene	*scene;
-	RT_Screen	*screen;
+	RT::Window	*window;
+	RT::Scene	*scene;
+	RT::Screen	*screen;
 	int			limitMin;
 	int			limitMax;
 }				dataThread_t;
 
-uint32_t	Antialiasing(RT_Scene const &scene, int x, int y)
+uint32_t	Antialiasing(RT::Scene const &scene, int x, int y)
 {
-	RT_Intersec		tmp_inter;
+	RT::Intersec		tmp_inter;
 	tmp_inter = scene.checkCollisionAll(x, y);
 	int tmp = sqrt(ANTIALIASING);
 	float sub = 1./ ANTIALIASING;
@@ -40,21 +40,21 @@ uint32_t	Antialiasing(RT_Scene const &scene, int x, int y)
 	return (((unsigned int)R << 24) + ((unsigned int)G << 16) + ((unsigned int)B << 8));
 }
 
-void	test_light(RT_Scene *scene)
+void	test_light(RT::Scene *scene)
 {
-	RT_Sphere	*testSphere = new RT_Sphere(0, -20, 0, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere2 = new RT_Sphere(0, 0, 0, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere3 = new RT_Sphere(0, 20, 0, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere4 = new RT_Sphere(0, -40, 0, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere5 = new RT_Sphere(0, 40, 0, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere6 = new RT_Sphere(0, -60, 0, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere7 = new RT_Sphere(0, 60, 0, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere8 = new RT_Sphere(0, 0, 20, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere9 = new RT_Sphere(0, 0, -20, 10, 0xFFFF0000);
-	RT_Sphere	*testSphere10 = new RT_Sphere(0, -20, 20, 5, 0x00FFFF00);
-	RT_Sphere	*testSphere11 = new RT_Sphere(0, 20, 20, 5, 0x00FFFF00);
-	RT_Sphere	*testSphere12 = new RT_Sphere(0, -20, -20, 5, 0x00FFFF00);
-	RT_Sphere	*testSphere13 = new RT_Sphere(0, 20, -20, 5, 0x00FFFF00);
+	RT::Sphere	*testSphere = new RT::Sphere(0, -20, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere2 = new RT::Sphere(0, 0, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere3 = new RT::Sphere(0, 20, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere4 = new RT::Sphere(0, -40, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere5 = new RT::Sphere(0, 40, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere6 = new RT::Sphere(0, -60, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere7 = new RT::Sphere(0, 60, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere8 = new RT::Sphere(0, 0, 20, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere9 = new RT::Sphere(0, 0, -20, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere10 = new RT::Sphere(0, -20, 20, 5, 0x00FFFF00);
+	RT::Sphere	*testSphere11 = new RT::Sphere(0, 20, 20, 5, 0x00FFFF00);
+	RT::Sphere	*testSphere12 = new RT::Sphere(0, -20, -20, 5, 0x00FFFF00);
+	RT::Sphere	*testSphere13 = new RT::Sphere(0, 20, -20, 5, 0x00FFFF00);
 	//RT_Plane	*testPlane = new RT_Plane(1, 0, 0, 10, 0xFFFFFFFF);
 
 	scene->addObjectOnScene(testSphere);
@@ -71,7 +71,7 @@ void	test_light(RT_Scene *scene)
 	scene->addObjectOnScene(testSphere12);
 	scene->addObjectOnScene(testSphere13);
 	//scene->addObjectOnScene(testPlane);
-	scene->addLightOnScene(-300, 0, 0, 0xFFFFFFFF, 0.5);
+	scene->addLightOnScene(-300, 0, 0, 0xFFFFFFFF);
 	//scene->addLightOnScene(-30, -100, 50, 0xFFFFFFFF);
 }
 
@@ -82,7 +82,7 @@ void	calcAll(dataThread_t *data)
 		for (int x = data->limitMin; x < data->limitMax; ++x)
 		{
 			if (ANTIALIASING == 1) {
-				RT_Intersec inter = data->scene->checkCollisionAll(x, y);
+				RT::Intersec inter = data->scene->checkCollisionAll(x, y);
 				data->screen->setColor(x, y, inter.getColor());
 			}
 			else {
@@ -92,7 +92,7 @@ void	calcAll(dataThread_t *data)
 	}
 }
 
-void	drawAll(RT_Pixel *pixel, RT_Screen *screen)
+void	drawAll(RT::Pixel *pixel, RT::Screen *screen)
 {
 	for (int y = 0; y < RES_Y; ++y)
 	{
@@ -105,7 +105,7 @@ void	drawAll(RT_Pixel *pixel, RT_Screen *screen)
 	SDL_RenderPresent(pixel->getRenderer());
 }
 
-void	calcThread(RT_Window *window, RT_Scene *scene, RT_Screen *screen, RT_Pixel *pixel, std::thread *tabThreads)
+void	calcThread(RT::Window *window, RT::Scene *scene, RT::Screen *screen, RT::Pixel *pixel, std::thread *tabThreads)
 {
 	for (int i = 0; i < NB_THREAD; ++i) {
 		dataThread_t	*data = new dataThread_t;
@@ -124,10 +124,10 @@ void	calcThread(RT_Window *window, RT_Scene *scene, RT_Screen *screen, RT_Pixel 
 
 int		main(int ac, char **av)
 {
-	RT_Window	*window= new RT_Window("Raytracer", RES_X, RES_Y);
-	RT_Scene	*scene = new RT_Scene;
-	RT_Screen	*screen = new RT_Screen;
-	RT_Pixel	*pixel = new RT_Pixel(window);
+	RT::Window	*window= new RT::Window("Raytracer", RES_X, RES_Y);
+	RT::Scene	*scene = new RT::Scene;
+	RT::Screen	*screen = new RT::Screen;
+	RT::Pixel	*pixel = new RT::Pixel(window);
 	std::thread		tabThreads[NB_THREAD];
 
 	scene->setCamera(-500, 0, 0);

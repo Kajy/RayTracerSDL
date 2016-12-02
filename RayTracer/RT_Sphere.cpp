@@ -1,6 +1,6 @@
 #include "RT_Sphere.h"
 
-RT_Sphere::RT_Sphere(float x, float y, float z, float radius, uint32_t color)
+RT::Sphere::Sphere(float x, float y, float z, float radius, uint32_t color)
 {
 	_color = color;
 	_shine = 0;
@@ -8,11 +8,11 @@ RT_Sphere::RT_Sphere(float x, float y, float z, float radius, uint32_t color)
 	_pos.setValue(x, y, z);
 }
 
-RT_Sphere::~RT_Sphere()
+RT::Sphere::~Sphere()
 {
 }
 
-float	RT_Sphere::checkCollision(RT_Vector3df const &camera, RT_Vector3df const &vect) const
+float	RT::Sphere::checkCollision(RT::Vector3df const &camera, RT::Vector3df const &vect) const
 {
 	float a, b, c, d, k1, k2;
 
@@ -29,10 +29,10 @@ float	RT_Sphere::checkCollision(RT_Vector3df const &camera, RT_Vector3df const &
 	return (-1);
 }
 
-void	RT_Sphere::calcNormale(RT_Vector3df *vect, float k, RT_Vector3df const &camera, RT_Intersec *inter) const
+void	RT::Sphere::calcNormale(RT::Vector3df *vect, float k, RT::Vector3df const &camera, RT::Intersec *inter) const
 {
 	inter->setInter((camera._x + (k * vect->_x)), (camera._y + (k * vect->_y)), (camera._z + (k * vect->_z)));
-	RT_Vector3df tmp(inter->getInter()._x - _pos._x, inter->getInter()._y - _pos._y, inter->getInter()._z - _pos._z);
+	RT::Vector3df tmp(inter->getInter()._x - _pos._x, inter->getInter()._y - _pos._y, inter->getInter()._z - _pos._z);
 	inter->setNormale(tmp._x, tmp._y, tmp._z);
 	vect->normalize();
 	float scal = vect->prodScalaire(inter->getNormale());
