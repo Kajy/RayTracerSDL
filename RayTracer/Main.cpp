@@ -78,9 +78,9 @@ void	test_antialiasing(RT_Scene *scene)
 }
 void	calcAll(RT_Scene const &scene, RT_Pixel &pixel, int antialiasing)
 {
-	for (int x = 0; x < RES_X; ++x)
+	for (int y = 0; y < RES_Y; ++y)
 	{
-		for (int y = 0; y < RES_Y; ++y)
+		for (int x = 0; x < RES_X; ++x)
 		{
 			if (antialiasing == 1) {
 				RT_Intersec inter = scene.checkCollisionAll(x, y);
@@ -125,15 +125,28 @@ int		main(int ac, char **av)
 	test_specular(&scene);
 
 	calcAll(scene, pixel, ANTIALIASING);
-	bool calc = false;
-	while (1) {
-		window.waitEvent();
-		if (window.checkEvent(SDL_WINDOWEVENT_CLOSE))
-			return (1);
-		/*if (calc == false) {
-			calcAll(scene, pixel, ANTIALIASING);
-			calc = true;
-		}*/
-	}
+	/*while (1) {
+		SDL_Event	ev;
+		while (SDL_PollEvent(&ev)) {
+			if (ev.window.event == SDL_WINDOWEVENT_CLOSE)
+				return 1;
+			else if (ev.key.keysym.scancode == SDL_SCANCODE_LEFT) {
+				scene.setCamera(scene.getCamera()._x, scene.getCamera()._y + 2, scene.getCamera()._z);
+				calcAll(scene, pixel, ANTIALIASING);
+			}
+			else if (ev.key.keysym.scancode == SDL_SCANCODE_RIGHT) {
+				scene.setCamera(scene.getCamera()._x, scene.getCamera()._y - 2, scene.getCamera()._z);
+				calcAll(scene, pixel, ANTIALIASING);
+			}
+			else if (ev.key.keysym.scancode == SDL_SCANCODE_UP) {
+				scene.setCamera(scene.getCamera()._x, scene.getCamera()._y, scene.getCamera()._z + 2);
+				calcAll(scene, pixel, ANTIALIASING);
+			}
+			else if (ev.key.keysym.scancode == SDL_SCANCODE_DOWN) {
+				scene.setCamera(scene.getCamera()._x, scene.getCamera()._y, scene.getCamera()._z - 2);
+				calcAll(scene, pixel, ANTIALIASING);
+			}
+		}
+	}*/
 	return (0);
 }
