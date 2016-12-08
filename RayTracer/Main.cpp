@@ -1,6 +1,5 @@
 #include "RT.h"
 #include "RT_Scene.h"
-#include "RT_Pixel.h"
 #include "RT_Sphere.h"
 #include "RT_Plane.h"
 #include "RT_Image.h"
