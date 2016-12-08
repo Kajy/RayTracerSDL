@@ -140,22 +140,22 @@ int		main(int ac, char **av)
 		while (SDL_PollEvent(&ev)) {
 			if (ev.window.event == SDL_WINDOWEVENT_CLOSE)
 				return 1;
-			else if (ev.key.keysym.scancode == SDL_SCANCODE_LEFT) {
-				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y + 0.1, scene->getCamera()._z);
+			/*else if (ev.key.keysym.scancode == SDL_SCANCODE_LEFT) {
+				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y + 1, scene->getCamera()._z);
 				calcThread(window, scene, screen, pixel, tabThreads);
 			}
 			else if (ev.key.keysym.scancode == SDL_SCANCODE_RIGHT) {
-				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y - 0.1, scene->getCamera()._z);
+				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y - 1, scene->getCamera()._z);
 				calcThread(window, scene, screen, pixel, tabThreads);
 			}
 			else if (ev.key.keysym.scancode == SDL_SCANCODE_UP) {
-				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y, scene->getCamera()._z + 0.1);
+				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y, scene->getCamera()._z + 1);
 				calcThread(window, scene, screen, pixel, tabThreads);
 			}
 			else if (ev.key.keysym.scancode == SDL_SCANCODE_DOWN) {
-				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y, scene->getCamera()._z - 0.1);
+				scene->setCamera(scene->getCamera()._x, scene->getCamera()._y, scene->getCamera()._z - 1);
 				calcThread(window, scene, screen, pixel, tabThreads);
-			}
+			}*/
 		}
 	}
 	return (0);
