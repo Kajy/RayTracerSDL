@@ -33,58 +33,58 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RT_Window.cpp">
-      <Filter>Source Files\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="Sources/Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RT_Scene.cpp">
+    <ClCompile Include="Sources/RT_Sphere.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources/RT_Plane.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources/RT_Image.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
-    <ClCompile Include="RT_Sphere.cpp">
-      <Filter>Source Files\Shapes</Filter>
+    <ClCompile Include="Sources/RT_Scene.cpp">
+      <Filter>Source Files\Class</Filter>
     </ClCompile>
-    <ClCompile Include="RT_Plane.cpp">
-      <Filter>Source Files\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="RT_Image.cpp">
+    <ClCompile Include="Sources/RT_Window.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RT.h">
+    <ClInclude Include="Include/RT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Object.h">
+    <ClInclude Include="Include/RT_Sphere.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Sphere.h">
+    <ClInclude Include="Include/RT_Scene.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Include/RT_Vector3df.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Include/RT_Plane.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Plane.h">
+    <ClInclude Include="Include/RT_Object.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Window.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Scene.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Light.h">
+    <ClInclude Include="Include/RT_Light.h">
       <Filter>Header Files\Light</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Color.h">
+    <ClInclude Include="Include/RT_Intersec.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Intersec.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Vector3df.h">
-      <Filter>Header Files\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Image.h">
+    <ClInclude Include="Include/RT_Image.h">
       <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Include/RT_Window.h">
+      <Filter>Header Files\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Include/RT_Color.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

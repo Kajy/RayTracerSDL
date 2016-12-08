@@ -90,6 +90,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\SDL2-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	  <AdditionalIncludeDirectories>.\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OmitFramePointers>true</OmitFramePointers>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -130,6 +131,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\SDL2-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	  <AdditionalIncludeDirectories>.\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OmitFramePointers>true</OmitFramePointers>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
@@ -165,25 +167,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="RT_Plane.cpp" />
-    <ClCompile Include="RT_Window.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="RT_Scene.cpp" />
-    <ClCompile Include="RT_Sphere.cpp" />
-    <ClCompile Include="RT_Image.cpp" />
+    <ClCompile Include="Sources/RT_Plane.cpp" />
+    <ClCompile Include="Sources/RT_Window.cpp" />
+    <ClCompile Include="Sources/Main.cpp" />
+    <ClCompile Include="Sources/RT_Scene.cpp" />
+    <ClCompile Include="Sources/RT_Sphere.cpp" />
+    <ClCompile Include="Sources/RT_Image.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RT_Image.h" />
-    <ClInclude Include="RT_Color.h" />
-    <ClInclude Include="RT_Plane.h" />
-    <ClInclude Include="RT_Light.h" />
-    <ClInclude Include="RT_Intersec.h" />
-    <ClInclude Include="RT_Sphere.h" />
-    <ClInclude Include="RT_Scene.h" />
-    <ClInclude Include="RT_Object.h" />
-    <ClInclude Include="RT.h" />
-    <ClInclude Include="RT_Vector3df.h" />
-    <ClInclude Include="RT_Window.h" />
+    <ClInclude Include="Include/RT_Image.h" />
+    <ClInclude Include="Include/RT_Color.h" />
+    <ClInclude Include="Include/RT_Plane.h" />
+    <ClInclude Include="Include/RT_Light.h" />
+    <ClInclude Include="Include/RT_Intersec.h" />
+    <ClInclude Include="Include/RT_Sphere.h" />
+    <ClInclude Include="Include/RT_Scene.h" />
+    <ClInclude Include="Include/RT_Object.h" />
+    <ClInclude Include="Include/RT.h" />
+    <ClInclude Include="Include/RT_Vector3df.h" />
+    <ClInclude Include="Include/RT_Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
