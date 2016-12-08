@@ -25,6 +25,7 @@ RT::Window::Window(const std::string title, int x, int y)
 		std::cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << std::endl;
 		SDL_Quit();
 	}
+	_Renderer = SDL_CreateRenderer(_Window, 0, SDL_RENDERER_ACCELERATED);
 }
 
 
@@ -44,4 +45,14 @@ bool	RT::Window::checkEvent(SDL_WindowEventID id) const
 SDL_Window	*RT::Window::getWindow() const
 {
 	return (_Window);
+}
+
+SDL_Renderer *RT::Window::getRenderer() const
+{
+	return (_Renderer);
+}
+void	RT::Window::drawPixel(uint32_t tmp_color, int x, int y) const
+{
+	SDL_SetRenderDrawColor(_Renderer, ((tmp_color & 0xff000000) >> 24), ((tmp_color & 0x00ff0000) >> 16), ((tmp_color & 0x0000ff00) >> 8), 0);
+	SDL_RenderDrawPoint(_Renderer, x, y);
 }

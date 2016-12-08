@@ -168,12 +168,12 @@
     <ClCompile Include="RT_Plane.cpp" />
     <ClCompile Include="RT_Window.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="RT_Pixel.cpp" />
     <ClCompile Include="RT_Scene.cpp" />
     <ClCompile Include="RT_Sphere.cpp" />
+    <ClCompile Include="RT_Image.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RT_Screen.h" />
+    <ClInclude Include="RT_Image.h" />
     <ClInclude Include="RT_Color.h" />
     <ClInclude Include="RT_Plane.h" />
     <ClInclude Include="RT_Light.h" />
@@ -183,7 +183,6 @@
     <ClInclude Include="RT_Object.h" />
     <ClInclude Include="RT.h" />
     <ClInclude Include="RT_Vector3df.h" />
-    <ClInclude Include="RT_Pixel.h" />
     <ClInclude Include="RT_Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

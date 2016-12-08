@@ -36,9 +36,6 @@
     <ClCompile Include="RT_Window.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
-    <ClCompile Include="RT_Pixel.cpp">
-      <Filter>Source Files\Class</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="RT_Plane.cpp">
       <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="RT_Image.cpp">
+      <Filter>Source Files\Class</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,16 +65,10 @@
     <ClInclude Include="RT_Plane.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="RT_Screen.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
     <ClInclude Include="RT_Window.h">
       <Filter>Header Files\Image</Filter>
     </ClInclude>
     <ClInclude Include="RT_Scene.h">
-      <Filter>Header Files\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="RT_Pixel.h">
       <Filter>Header Files\Image</Filter>
     </ClInclude>
     <ClInclude Include="RT_Light.h">
@@ -88,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="RT_Vector3df.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Image.h">
+      <Filter>Header Files\Image</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

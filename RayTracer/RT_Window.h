@@ -1,7 +1,7 @@
-#include "RT.h"
-
 #ifndef RT_WINDOW_H_
 #define RT_WINDOW_H_
+
+#include "RT.h"
 
 namespace RT {
 
@@ -11,6 +11,7 @@ namespace RT {
 		SDL_Window		*_Window;
 		SDL_Event		*_Event;
 		SDL_GLContext	_OpenGLContext;
+		SDL_Renderer	*_Renderer;
 		bool			_Done;
 		int				_x;
 		int				_y;
@@ -19,9 +20,11 @@ namespace RT {
 	public:
 		Window(const std::string title, int x, int y);
 		~Window();
-		SDL_Window	*getWindow() const;
-		void	waitEvent() const;
-		bool	checkEvent(SDL_WindowEventID id) const;
+		SDL_Window		*getWindow() const;
+		SDL_Renderer	*getRenderer() const;
+		void			waitEvent() const;
+		bool			checkEvent(SDL_WindowEventID id) const;
+		void			drawPixel(uint32_t tmp_color, int x, int y) const;
 	};
 
 }
