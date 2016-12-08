@@ -39,7 +39,7 @@ void	RT::Image::calcAll(int limitMin, int limitMax, RT::Scene *scene, RT::Image 
 		for (int x = limitMin; x < limitMax; ++x)
 		{
 			if (ANTIALIASING == 1) {	
-				RT::Intersec inter = scene->checkCollisionAll(x, y);
+				RT::Intersec inter = scene->checkCollisionAll((float)x, (float)y);
 				image->setColor(x, y, inter.getColor());
 			}
 			else {
@@ -52,8 +52,8 @@ void	RT::Image::calcAll(int limitMin, int limitMax, RT::Scene *scene, RT::Image 
 uint32_t	RT::Image::Antialiasing(RT::Scene const &scene, int x, int y)
 {
 	RT::Intersec		tmp_inter;
-	tmp_inter = scene.checkCollisionAll(x, y);
-	int tmp = sqrt(ANTIALIASING);
+	tmp_inter = scene.checkCollisionAll((float)x, (float)y);
+	float tmp = (float)(sqrt(ANTIALIASING));
 	float sub = 1. / ANTIALIASING;
 	float R = 0, G = 0, B = 0;
 	int x2 = 1;

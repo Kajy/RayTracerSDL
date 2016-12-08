@@ -69,7 +69,6 @@ uint32_t		RT::Scene::checkLights(RT::Intersec const &inter) const
 	float			spec = 0;
 	RT::Vector3df	vect_light;
 	RT::Color		FinalColor(COLOR_BACKGROUND), ColorTmp;
-	float			R_tmp, G_tmp, B_tmp;
 
 	uint32_t tmp_color = inter.getColor();
 	for (auto const &i : _lights) {
@@ -80,14 +79,14 @@ uint32_t		RT::Scene::checkLights(RT::Intersec const &inter) const
 		ColorTmp.tranformColorWithLightsCoef(tmp_color, *i, cos_light, pow(cos_reflect, 48));
 		FinalColor.addColor(ColorTmp.getR(), ColorTmp.getG(), ColorTmp.getB());
 	}
-	FinalColor.divColor(_lights.size());
+	FinalColor.divColor((float)(_lights.size()));
 	return (FinalColor.getColor());
 }
 
 uint32_t	RT::Scene::checkShadows(RT::Intersec const &inter, uint32_t color, RT::Object *obj) const
 {
 	RT::Vector3df vect;
-	float nb_inter = _lights.size();
+	uint32_t nb_inter = _lights.size();
 	float tmp = -1;
 	RT::Color	FinalColorShadow(color);
 	bool stop = false;
@@ -105,6 +104,6 @@ uint32_t	RT::Scene::checkShadows(RT::Intersec const &inter, uint32_t color, RT::
 			}
 		}
 	}
-	FinalColorShadow.mulColor(nb_inter / _lights.size());
+	FinalColorShadow.mulColor((float)(nb_inter / _lights.size()));
 	return (FinalColorShadow.getColor());
 }

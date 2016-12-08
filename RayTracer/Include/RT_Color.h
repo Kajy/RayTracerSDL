@@ -15,18 +15,18 @@ namespace RT {
 			_Bf(0)
 		{};
 		Color(uint32_t color) :
-			_Rf((color & 0xff000000) >> 24),
-			_Gf((color & 0x00ff0000) >> 16),
-			_Bf((color & 0x0000ff00) >> 8),
+			_Rf((float)((color & 0xff000000) >> 24)),
+			_Gf((float)((color & 0x00ff0000) >> 16)),
+			_Bf((float)((color & 0x0000ff00) >> 8)),
 			_color(color)
 		{};
 
 		~Color() {};
 
 		void	setColor(uint32_t color) {
-			_Rf = (color & 0xff000000) >> 24;
-			_Gf = (color & 0x00ff0000) >> 16;
-			_Bf = (color & 0x0000ff00) >> 8;
+			_Rf = (float)((color & 0xff000000) >> 24);
+			_Gf = (float)((color & 0x00ff0000) >> 16);
+			_Bf = (float)((color & 0x0000ff00) >> 8);
 			_color = color;
 		}
 
