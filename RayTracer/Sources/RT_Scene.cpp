@@ -41,22 +41,21 @@ RT::Intersec		RT::Scene::checkCollisionAll(float x, float y) const
 	float		tmp = -1;
 	uint32_t	tmp_color = 0;
 	RT::Intersec inter;
-	RT::Object 	*obj = NULL;
 	RT::Vector3df vect(0, 0, 0);
 
-	for (auto i(_objects.begin()); i != _objects.end(); ++i) {
-		vect.setValue(FOV - this->getCamera()._x - (*i)->getPos()._x, ((RES_X / 2) - x) - this->getCamera()._y - (*i)->getPos()._y, ((RES_Y / 2) - y) - this->getCamera()._z - (*i)->getPos()._z);
+	for (auto const &i : _objects) {
+		vect.setValue(FOV - this->getCamera()._x - i->getPos()._x, ((RES_X / 2) - x) - this->getCamera()._y - i->getPos()._y, ((RES_Y / 2) - y) - this->getCamera()._z - i->getPos()._z);
 		vect.normalize();
-		tmp = (*i)->checkCollision(this->getCamera(), vect);
+		tmp = i->checkCollision(this->getCamera(), vect);
 		if ((tmp > 0 && k == -1) || (tmp > 0 && tmp < k)) {
 			k = tmp;
-			obj = (*i);
-			tmp_color = (*i)->getColor();
+			i->calcNormale(&vect, k, this->getCamera(), &inter);
+			tmp_color = i->getColor();
 		}
 	}
-	if (k != -1 && obj != NULL) {
+	if (k != -1) {
 		inter.setDist(k);
-		obj->calcNormale(&vect, k, this->getCamera(), &inter);
+		//obj->calcNormale(&vect, k, this->getCamera(), &inter);
 		inter.setColor(tmp_color);
 		inter.setColor(/*this->checkShadows(inter, */this->checkLights(inter)/*, obj)*/);
 	}

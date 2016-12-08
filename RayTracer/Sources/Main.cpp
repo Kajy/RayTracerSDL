@@ -11,7 +11,7 @@
 void	test_light(RT::Scene *scene)
 {
 	RT::Sphere	*testSphere = new RT::Sphere(0, -20, 0, 10, 0xFFFF0000);
-	RT::Sphere	*testSphere2 = new RT::Sphere(0, 0, 0, 10, 0xFFFF0000);
+	RT::Sphere	*testSphere2 = new RT::Sphere(0, 0, 0, 10, 0xFF000000);
 	RT::Sphere	*testSphere3 = new RT::Sphere(0, 20, 0, 10, 0xFFFF0000);
 	RT::Sphere	*testSphere4 = new RT::Sphere(0, -40, 0, 10, 0xFFFF0000);
 	RT::Sphere	*testSphere5 = new RT::Sphere(0, 40, 0, 10, 0xFFFF0000);
@@ -26,8 +26,8 @@ void	test_light(RT::Scene *scene)
 	//RT_Plane	*testPlane = new RT_Plane(1, 0, 0, 10, 0xFFFFFFFF);
 
 	scene->addObjectOnScene(testSphere);
-	scene->addObjectOnScene(testSphere2);
 	scene->addObjectOnScene(testSphere3);
+	scene->addObjectOnScene(testSphere2);
 	scene->addObjectOnScene(testSphere4);
 	scene->addObjectOnScene(testSphere5);
 	scene->addObjectOnScene(testSphere6);
@@ -39,11 +39,16 @@ void	test_light(RT::Scene *scene)
 	scene->addObjectOnScene(testSphere12);
 	scene->addObjectOnScene(testSphere13);
 	//scene->addObjectOnScene(testPlane);
-	scene->addLightOnScene(-300, 0, 0, 0xFFFFFFFF);
+	scene->addLightOnScene(-30, 0, 0, 0xFFFFFFFF);
 	//scene->addLightOnScene(-30, -100, 50, 0xFFFFFFFF);
 }
 
-
+void	test_4k(RT::Scene *scene)
+{
+	RT::Sphere	*testSphere2 = new RT::Sphere(0, 0, 0, 50, 0xFFFF0000);
+	scene->addLightOnScene(-300, 0, 0, 0xFFFFFFFF);
+	scene->addObjectOnScene(testSphere2);
+}
 
 void	drawAll(RT::Window *window, RT::Image *screen)
 {

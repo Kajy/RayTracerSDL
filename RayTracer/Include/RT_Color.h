@@ -77,9 +77,9 @@ namespace RT {
 		}
 
 		void		tranformColorWithLightsCoef(uint32_t colorBase, RT::Light const &light, float LightCoef, float ReflectCoef) {
-			_Rf = (((colorBase & 0xff000000) >> 24) * LightCoef + ((((light.getColor() & 0xff000000) - (colorBase & 0xff000000)) >> 24) * ReflectCoef))  * light.getDiffuseCoef();
-			_Bf = (((colorBase & 0x00ff0000) >> 16) * LightCoef + ((((light.getColor() & 0x00ff0000) - (colorBase & 0x00ff0000)) >> 16) * ReflectCoef)) * light.getDiffuseCoef();
-			_Gf = (((colorBase & 0x0000ff00) >> 8) * LightCoef + ((((light.getColor() & 0x0000ff00) - (colorBase & 0x0000ff00)) >> 8) * ReflectCoef)) * light.getDiffuseCoef();
+			_Rf = (((colorBase & 0xff000000) >> 24) * LightCoef +((((light.getColor() & 0xff000000) - (colorBase & 0xff000000)) >> 24) * ReflectCoef))  * light.getDiffuseCoef();
+			_Bf = (((colorBase & 0x00ff0000) >> 16) * LightCoef + ((((light.getColor() & 0x00ff0000) -(colorBase & 0x00ff0000)) >> 16) * ReflectCoef)) * light.getDiffuseCoef();
+			_Gf = (((colorBase & 0x0000ff00) >> 8) * LightCoef + ((((light.getColor() & 0x0000ff00) -(colorBase & 0x0000ff00)) >> 8) * ReflectCoef)) * light.getDiffuseCoef();
 		}
 
 		float	getR() const { return _Rf; }
