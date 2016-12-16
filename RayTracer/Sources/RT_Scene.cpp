@@ -42,6 +42,7 @@ RT::Intersec		RT::Scene::checkCollisionAll(float x, float y) const
 	uint32_t	tmp_color = 0;
 	RT::Intersec inter;
 	RT::Vector3df vect(0, 0, 0);
+	RT::Object		*obj = NULL;
 
 	for (auto const &i : _objects) {
 		vect.setValue(FOV - this->getCamera()._x - i->getPos()._x, ((RES_X / 2) - x) - this->getCamera()._y - i->getPos()._y, ((RES_Y / 2) - y) - this->getCamera()._z - i->getPos()._z);
@@ -51,13 +52,14 @@ RT::Intersec		RT::Scene::checkCollisionAll(float x, float y) const
 			k = tmp;
 			i->calcNormale(&vect, k, this->getCamera(), &inter);
 			tmp_color = i->getColor();
+			obj = i;
 		}
 	}
 	if (k != -1) {
 		inter.setDist(k);
 		//obj->calcNormale(&vect, k, this->getCamera(), &inter);
 		inter.setColor(tmp_color);
-		inter.setColor(/*this->checkShadows(inter, */this->checkLights(inter)/*, obj)*/);
+		inter.setColor(this->checkShadows(inter, this->checkLights(inter), obj));
 	}
 	return (inter);
 }

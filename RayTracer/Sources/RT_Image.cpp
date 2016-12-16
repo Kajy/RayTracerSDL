@@ -21,22 +21,22 @@ uint32_t	RT::Image::getColor(int x, int y)
 	return image[y][x];
 }
 
-void	RT::Image::calcThread(RT::Scene *scene)
+void	RT::Image::calcThread(RT::Scene *scene, int testEcart)
 {
 	std::thread		tabThreads[NB_THREAD];
 
 	for (int i = 0; i < NB_THREAD; ++i)
-		tabThreads[i] = std::thread(RT::Image::calcAll, (RES_X / NB_THREAD) * i, (RES_X / NB_THREAD) * (i + 1), scene, this);
+		tabThreads[i] = std::thread(RT::Image::calcAll, (RES_X / NB_THREAD) * i, (RES_X / NB_THREAD) * (i + 1), scene, this, testEcart);
 	for (int i = 0; i < NB_THREAD; ++i)
 		tabThreads[i].join();
 
 }
 
-void	RT::Image::calcAll(int limitMin, int limitMax, RT::Scene *scene, RT::Image *image)
+void	RT::Image::calcAll(int limitMin, int limitMax, RT::Scene *scene, RT::Image *image, int testEcart)
 {
-	for (int y = 0; y < RES_Y; ++y)
+	for (int y = 0; y < RES_Y; y += testEcart)
 	{
-		for (int x = limitMin; x < limitMax; ++x)
+		for (int x = limitMin; x < limitMax; x += testEcart)
 		{
 			if (ANTIALIASING == 1) {	
 				RT::Intersec inter = scene->checkCollisionAll((float)x, (float)y);

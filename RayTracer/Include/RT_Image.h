@@ -14,8 +14,8 @@ namespace RT {
 		~Image() {};
 		void		setColor(int x, int y, uint32_t color);
 		uint32_t	getColor(int x, int y);
-		void		calcThread(Scene *scene);
-		static void	calcAll(int limitMin, int limitMax, RT::Scene *scene, RT::Image *image);
+		void		calcThread(Scene *scene, int testEcart = TEST_ECART);
+		static void	calcAll(int limitMin, int limitMax, RT::Scene *scene, RT::Image *image, int testEcart);
 		uint32_t	Antialiasing(RT::Scene const &scene, int x, int y);
 
 	private:
